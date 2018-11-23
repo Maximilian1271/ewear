@@ -1,0 +1,148 @@
+.login{
+	width: 700px;
+	background: #F0F0F0;
+	border-radius: 10px;
+	box-shadow: 0 3px 6px rgba(0,0,0,.15);
+	padding-top: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 290px;
+}
+.login>h2{
+	font-weight: normal;
+	margin: 0 50px;
+}
+.login>form>.row{
+	margin-top: 52px;
+	justify-content: center;
+	display: flex;
+	/*padding: 0 150px;*/
+	flex-wrap: wrap;
+}
+
+/*experimental*/
+.field > input{
+	outline: none;
+	width: 100%;
+	height: 25px;
+	border: none;
+	background: transparent;
+	border-bottom: 1px solid black;
+	position: relative;
+	display: block;
+}
+.field{
+	margin: 0 40px;
+	height: 26px;
+	position: relative;
+}
+
+.field:last-child {
+	margin-top: 72px;
+	margin-bottom: 108px;
+}
+.field > .label {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin-left: 0;
+	position: absolute;
+	top: 0;
+	pointer-events: none;
+	-webkit-transition: transform .3s, color .3s;
+	-moz-transition: transform .3s, color .3s;
+	-ms-transition: transform .3s, color .3s;
+	-o-transition: transform .3s, color .3s;
+	transition: transform .3s, color .3s;
+	/*transform-origin: bottom left;*/
+}
+.field>button{
+	width: 157px;
+	height: 25px;
+	background: transparent;
+	border: 1px solid;
+	font-size: 15px;
+	font-weight: normal;
+}
+.row>div:nth-child(2)>label{
+	transform-origin: bottom right;
+	right: 0;
+}
+.row>div:nth-child(1)>label{
+	transform-origin: bottom left;
+}
+.row>div:nth-child(2)>input{
+	text-align: right;
+}
+.row>div>input:focus ~ label.label{
+	-webkit-transition: transform .3s, color .3s;
+	-moz-transition: transform .3s, color .3s;
+	-ms-transition: transform .3s, color .3s;
+	-o-transition: transform .3s, color .3s;
+	transition: transform .3s, color .3s;
+	-webkit-transform: translateY(-30px) scale(.75);
+	-moz-transform: translateY(-30px) scale(.75);
+	-ms-transform: translateY(-30px) scale(.75);
+	-o-transform: translateY(-30px) scale(.75);
+	transform: translateY(-30px) scale(.75);
+	color: #D19650;
+}
+.row>div:nth-child(1)>input:focus ~ label.label {
+	transform-origin: bottom left;
+}
+.row>div:nth-child(2)>input:focus ~ label.label {
+	transform-origin: bottom right;
+}
+.field > input:focus ~ .label::after {
+	content: ":";
+}
+.textfield {
+	/*flex-basis: 50%;*/
+}
+
+.field > input:focus ~ .underline {
+	transition: transform .3s;
+	transform: scale(1);
+}
+
+.underline {
+	transition: transform .3s;
+	position: absolute;
+	background-color: #D19650;
+	-webkit-transform: scale(0);
+	-moz-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+	height: 2px;
+	width: 100%;
+	bottom: 0;
+}
+.activejs {
+	-webkit-transition: transform .3s, color .3s;
+	-moz-transition: transform .3s, color .3s;
+	-ms-transition: transform .3s, color .3s;
+	-o-transition: transform .3s, color .3s;
+	transition: transform .3s, color .3s;
+	-webkit-transform: translateY(-30px) scale(.75);
+	-moz-transform: translateY(-30px) scale(.75);
+	-ms-transform: translateY(-30px) scale(.75);
+	-o-transform: translateY(-30px) scale(.75);
+	transform: translateY(-30px) scale(.75);
+}
+
+.activejs:after {
+	content: ":";
+}
+/*/experimental*/
+.error{
+	position: relative;
+	padding: .75rem 1.25rem;
+	margin: 1rem 1rem;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}

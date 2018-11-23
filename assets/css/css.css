@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400');
+*{
+	box-sizing: border-box;
+	margin: 0;
+	font-family: "Montserrat", sans-serif;
+}
+i{
+	font-style: normal;
+}
+a{
+	text-decoration: none;
+	color: inherit;
+}
+
+.nav-main{
+	position: relative;
+	/*max-width: 100vw;*/
+	/*width: 100vw;*/
+	height: 62px;
+	background-color: #AAA;
+	padding: 0 370px;
+	display: flex;
+	justify-content: flex-end;
+}
+.nav-main>.search{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.nav-main>.search>input{
+	position: relative;
+	width: 541px;
+	height: 24px;
+	padding: 0 10px;
+	border: 1px solid #707070;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+.nav-main>.search>label>.search{
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	height: 20px;
+}
+.nav-main>.options{
+	align-self: center;
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+}
+.nav-main>.options>*{
+	padding: 0 10px;
+}
+.nav-main>.options>a>svg{
+	height: 24px;
+	transform: translateY(15%);
+}
+header>.logo{
+	margin: 0 auto;
+	margin-top: 36px;
+	margin-bottom: 50px;
+	width: 185px;
+}
+header{
+	margin-bottom: 51px;
+}
+.nav-subnav{
+	width: 100%;
+	padding: 0 370px;
+	display: flex;
+	justify-content: center;
+}
+.nav-subnav>*{
+	padding: 0 35px;
+	position: relative;
+}
+.nav-subnav>*.underline::after{
+	content: '';
+	background-color: #000;
+	position: absolute;
+	bottom: -1px;
+	height: 1px;
+}
+footer{
+	/*width: 100vw;*/
+	background-color: #AAAAAA;
+}
+.footer{
+	display: flex;
+	padding: 0 370px;
+	justify-content: center;
+	padding-top: 25px;
+	padding-bottom: 60px;
+}
+.footer>div{
+	flex-basis: 33.3333%;
+}
+.footer>div:first-child{
+	text-align: left;
+}
+.footer>div:last-child{
+	text-align: right;
+}
+.footer>div:nth-child(2){
+	text-align: center;
+}
+.container{
+	padding: 0 370px;
+}
+.footer>.content>div{
+	line-height: 22px;
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
+	margin-top: 19px;
+}
+.footer>.content>div>a{
+	text-decoration: underline;
+}
+.footer>.content>div>i{
+	font-size: 8px;
+}
+.footer>.content>h2{
+	font-weight: 300;
+	font-size: 20px;
+}
