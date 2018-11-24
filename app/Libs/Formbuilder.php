@@ -4,14 +4,14 @@ class Formbuilder
 {
 	private $markup="";
 	public function __construct($name ,$method="POST", $action="", $enctype=false){
-		$this->markup="<script src='assets/js/animationworkaround.js'></script>";
+		$this->markup="<script src='assets/js/animationworkaround.js'></script>\n";
 		$this->markup.="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";
 		$this->markup.=($enctype)?"enctype\"multipart/form-dat>":">";
 //		$csrf= set_csrf();
 //		$this->markup.="<input type='hidden' value='$csrf' name='csrf'>";
-		$this->markup.="<div class='row'>";
+		$this->markup.="<div class='row'>\n";
 	}
 	public function addInput($type="text", $name="", $label=false, $attr=array()){
 		$this->markup.="<div class='field textfield'>";
@@ -24,22 +24,21 @@ class Formbuilder
 					$this->markup.=" $key=\"$item\"";
 				endforeach;
 			}
-			$this->markup.=">";//input ende
+			$this->markup.=">\n";//input ende
 		if($label!=false){
 			$this->markup.="<label for='$name' class='label'>$label</label>";
 			$this->markup.="<div class=\"underline\"></div>";
 		}
-		$this->markup.="</div>";//form-group ende
+		$this->markup.="</div>\n";//form-group ende
 		return $this;
 	}
 	public function addButton($name, $value, $attr = array())
 	{
-		$this->markup .= "<div class='field'>";
+		$this->markup .= "<div class='field button'>";
 		$this->markup .= "<button name=\"$name\" id=\"$name\" ";
 		$class = (isset($attr['class'])) ? "{$attr['class']}" : "button";
 		$this->markup .= " class=\"$class\"";
 		if (count($attr) > 0) {
-
 			foreach ($attr as $key => $val):
 				if ($key == "class") continue;
 				$this->markup .= " $key=\"$val\"";
@@ -88,7 +87,7 @@ class Formbuilder
 		$this->markup .= "</div>"; // form-group end
 		return $this;
 	}
-	public function addCheckbox($values=array(), $attr=array())
+/*	public function addCheckbox($values=array(), $attr=array())
 	{
 		$this->markup .= "<div class='field checkbox'>";
 		foreach ($values as $key => $item) {
@@ -98,6 +97,25 @@ class Formbuilder
 				};
 				$this->markup.="> <label for='$key'>$item</label></div>";
 		}
+		$this->markup .= "</div>";
+		return $this;
+	}*/
+	public function addCheckbox($values=array(), $attr=array())
+	{
+		$this->markup .= "<div class='field checkbox'>";
+		foreach ($values as $key => $item){
+			$this->markup.="<label for=\"$key\">";
+			$this->markup.="<input type=\"checkbox\" name=\"$key\" id=\"$key\" value=\"$key\">";
+			$this->markup.="<span>$item</span>";
+			$this->markup.="</label>";
+		}
+		/*foreach ($values as $key => $item) {
+			$this->markup .= "<div><input type=\"checkbox\" name='$key' id='$key' value='$key'";
+			foreach($attr as $key){
+				$this->markup.=$key;
+			};
+			$this->markup.="> <label for='$key'>$item</label></div>";
+		}*/
 		$this->markup .= "</div>";
 		return $this;
 	}

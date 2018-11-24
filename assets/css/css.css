@@ -8,7 +8,7 @@ i{
 	font-style: normal;
 }
 a{
-	text-decoration: none;
+	/*text-decoration: none;*/
 	color: inherit;
 }
 
@@ -91,6 +91,7 @@ header{
 footer{
 	/*width: 100vw;*/
 	background-color: #AAAAAA;
+	margin-top: 145px;
 }
 .footer{
 	display: flex;

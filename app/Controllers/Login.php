@@ -9,11 +9,11 @@
 namespace App\Controllers;
 
 
-use App\Core\Controller;
+use App\Core\GuestController;
 use App\Libs\Formbuilder;
 use App\Libs\Validator;
 
-class Login extends Controller {
+class Login extends GuestController {
 	public function index(){
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->login();
