@@ -12,6 +12,7 @@ namespace App\Controllers;
 use App\Core\GuestController;
 use App\Libs\Formbuilder;
 use App\Libs\Validator;
+use App\Models\User;
 
 class Register extends GuestController
 {
@@ -45,13 +46,33 @@ class Register extends GuestController
 		$val->val($_POST['surname'], "Surname", true, "textnum", 2, 50);
 		$val->val($_POST['uname'], "Username", true, "textnum", 2, 50);
 		$val->val($_POST['email'], "E-Mail-Address", true, "email", 2, 50);
-		$val->val($_POST['address'], "Street Address", false, "textnum", 15, 50);
 		$val->val($_POST['pw'], "Password", true, "textnum", 5, 999);
 		$val->val($_POST['pw2'], "Repeat Password", true, "textnum", 5, 999);
 		$val->comp([$_POST['pw'], "Password"], [$_POST['pw2'], "Repeat Password"]);
-
+		if (!isset($_POST['tos'])){
+			$val->val("", "Terms of Service", true, "num");
+		}
 		if($val->getErrors()===false){
-			//register
+			$user=new User();
+			if($user->checkUname($_POST['uname'])){
+				$val->getErrors(7);
+			}
+			if($user->checkEmail($_POST['email'])){
+				$val->getErrors(8);
+			}
+			if($val->getErrors()!==false){
+				return $val->getErrors();
+			}
+			if(isset($_POST['newsletter'])){
+				$newsletter=1;
+			}else $newsletter=0;
+			$hash=$user->setUser($_POST['uname'], $_POST['email'], $_POST['pw'], $_POST['name'], $_POST['surname'], $_POST['address'], $_POST['zip'], $newsletter);
+			header("Location:".APP_URL."register/success");
+
 		}else return $val->getErrors();
+	}
+	public function success(){
+		$data['css']=$this->insertCSS("login.css");
+		$this->view->render("register/success", $data);
 	}
 }

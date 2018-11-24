@@ -57,6 +57,7 @@ a{
 }
 .nav-main>.options>*{
 	padding: 0 10px;
+	font-size: 14px;
 }
 .nav-main>.options>a>svg{
 	height: 24px;

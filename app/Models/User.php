@@ -7,14 +7,14 @@ use App\Core\Model;
 class User extends Model {
 	protected $table_name = "users";
 
-	public function setUser($uname, $email, $password, $fname, $lname, $tel, $country){
+	public function setUser($uname, $email, $password, $name, $surname, $address, $zip, $newsletter){
 		$user_group = 0;
 		$created_at = time();
 		$data = [
-			'fname'=> $fname,
-			'lname' => $lname,
-			'tel' => $tel,
-			'country' => $country
+			'name'=> $name,
+			'surname' => $surname,
+			'address'=> $address,
+			'zip' => $zip
 		];
 		$data = json_encode($data);
 		$hash = uniqid();
@@ -23,8 +23,8 @@ class User extends Model {
 		$salt = $this->generateSalt();
 		$pw = sha1($password . $salt) . ":" . $salt;
 
-		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, user_group, hash, is_active, created_at) Values (?,?,?,?,?,?,?,?)");
-		$stmt->bind_param("ssssisii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at);
+		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, user_group, hash, is_active, created_at, newsletter) Values (?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("ssssisiii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at, $newsletter);
 		$stmt->execute();
 		return $hash;
 	}

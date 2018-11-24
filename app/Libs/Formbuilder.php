@@ -24,6 +24,7 @@ class Formbuilder
 					$this->markup.=" $key=\"$item\"";
 				endforeach;
 			}
+			if (isset($_POST[$name])&&$type!=="password")$this->markup.="value=$_POST[$name]";
 			$this->markup.=">\n";//input ende
 		if($label!=false){
 			$this->markup.="<label for='$name' class='label'>$label</label>";
@@ -87,25 +88,12 @@ class Formbuilder
 		$this->markup .= "</div>"; // form-group end
 		return $this;
 	}
-/*	public function addCheckbox($values=array(), $attr=array())
-	{
-		$this->markup .= "<div class='field checkbox'>";
-		foreach ($values as $key => $item) {
-			$this->markup .= "<div><input type=\"checkbox\" name='$key' id='$key' value='$key'";
-				foreach($attr as $key){
-					$this->markup.=$key;
-				};
-				$this->markup.="> <label for='$key'>$item</label></div>";
-		}
-		$this->markup .= "</div>";
-		return $this;
-	}*/
 	public function addCheckbox($values=array(), $attr=array())
 	{
 		$this->markup .= "<div class='field checkbox'>";
 		foreach ($values as $key => $item){
 			$this->markup.="<label for=\"$key\">";
-			$this->markup.="<input type=\"checkbox\" name=\"$key\" id=\"$key\" value=\"$key\">";
+			$this->markup.="<input type=\"checkbox\" name=\"$key\" id=\"$key\" value=\"1\">";
 			$this->markup.="<span>$item</span>";
 			$this->markup.="</label>";
 		}

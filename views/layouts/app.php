@@ -6,11 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php echo APP_URL."assets/css/css.css" ?>">
-<!--	<link rel="stylesheet" href="--><?php //echo APP_URL."assets/css/login.css" ?><!--">-->
-<!--	<link rel="stylesheet" href="--><?php //echo APP_URL."assets/css/home.css" ?><!--">-->
 </head>
 <body>
-	<div class="header"><?php load_global("header");
+	<div class="app"><?php
+		load_global("header");
 		load_view($view, $data);
 		load_global("footer")?>
 	</div>

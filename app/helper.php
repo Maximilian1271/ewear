@@ -16,3 +16,6 @@ function load_global($global){
 //function check_csrf($csrf){
 //	return (Sessions::get("csrf")==$csrf)?true:false;
 //}
+function previous($x){ //Funktion zum wiedergeben alter formular elemente (falls form invalid)
+	return(isset($_POST[$x]))?trim($_POST[$x]):"";
+}
