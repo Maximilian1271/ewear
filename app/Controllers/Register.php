@@ -70,6 +70,7 @@ class Register extends GuestController
 			header("Location:".APP_URL."register/success");
 
 		}else return $val->getErrors();
+		return true;
 	}
 	public function success(){
 		$data['css']=$this->insertCSS("login.css");
