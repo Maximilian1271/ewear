@@ -10,7 +10,6 @@ class Validator
 		'textnum' => '/^[\w]+$/',
 		'email'   => '/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/',
 		'url'     => '/^http(s)?:\/\/([\w]{1,20}\.)?[a-z0-9-]{2,65}(\.[a-z]{2,10}){1,2}(\/)?$/',
-		'tel'     => '/^[\d]+$/'
 	];
 
 	private $error_msg = [];
@@ -43,7 +42,7 @@ class Validator
 		}
 	}
 
-	public function check($data1, $data2)
+	public function comp($data1, $data2)
 	{
 		if (is_array($data1) && is_array($data2)) {
 			if ($data1[0] !== $data2[0]) {

@@ -15,6 +15,7 @@ use App\Libs\Validator;
 
 class Login extends GuestController {
 	public function index(){
+		$data['css']=$this->insertCSS("login.css");
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->login();
 		}

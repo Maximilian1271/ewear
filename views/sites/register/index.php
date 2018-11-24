@@ -1,3 +1,4 @@
+<?php echo $css;?>
 <div class="container">
 	<div class="login">
 		<h2>Register</h2>

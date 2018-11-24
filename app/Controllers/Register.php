@@ -16,6 +16,7 @@ use App\Libs\Validator;
 class Register extends GuestController
 {
 	public function index(){
+		$data['css']=$this->insertCSS("register.css");
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->register();
 		}
@@ -24,7 +25,7 @@ class Register extends GuestController
 			->addInput("text", "surname", "Surname", ["class"=>"jsfocusactive"])
 			->addInput("text", "uname", "Username", ["class"=>"jsfocusactive"])
 			->addInput("email", "email", "E-Mail Address", ["class"=>"jsfocusactive"])
-			->addInput("text", "Address", "Street Address", ["class"=>"jsfocusactive"])
+			->addInput("text", "address", "Street Address", ["class"=>"jsfocusactive"])
 			->addInput("text", "zip", "ZIP Code", ["class"=>"jsfocusactive"])
 			->addInput("password", "pw", "Password", ["class"=>"jsfocusactive"])
 			->addInput("password", "pw2", "Repeat Password", ["class"=>"jsfocusactive"])
@@ -44,9 +45,10 @@ class Register extends GuestController
 		$val->val($_POST['surname'], "Surname", true, "textnum", 2, 50);
 		$val->val($_POST['uname'], "Username", true, "textnum", 2, 50);
 		$val->val($_POST['email'], "E-Mail-Address", true, "email", 2, 50);
-		$val->val($_POST['address'], "Surname", false, "textnum", 2, 50);
-
-
+		$val->val($_POST['address'], "Street Address", false, "textnum", 15, 50);
+		$val->val($_POST['pw'], "Password", true, "textnum", 5, 999);
+		$val->val($_POST['pw2'], "Repeat Password", true, "textnum", 5, 999);
+		$val->comp([$_POST['pw'], "Password"], [$_POST['pw2'], "Repeat Password"]);
 
 		if($val->getErrors()===false){
 			//register
