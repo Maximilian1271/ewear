@@ -16,7 +16,7 @@ class Formbuilder
 	public function addInput($type="text", $name="", $label=false, $attr=array()){
 		$this->markup.="<div class='field textfield'>";
 		$this->markup.="<input type='$type' name='$name' id='$name' ";
-			$class=isset($attr['class'])?"form {$attr['class']}":"form";
+			$class=isset($attr['class'])?"{$attr['class']}":"form";
 			$this->markup.="class='$class'";
 			if(count($attr)>0){
 				foreach($attr as $key=>$item):
@@ -36,7 +36,7 @@ class Formbuilder
 	{
 		$this->markup .= "<div class='field'>";
 		$this->markup .= "<button name=\"$name\" id=\"$name\" ";
-		$class = (isset($attr['class'])) ? "button {$attr['class']}" : "button";
+		$class = (isset($attr['class'])) ? "{$attr['class']}" : "button";
 		$this->markup .= " class=\"$class\"";
 		if (count($attr) > 0) {
 
@@ -52,7 +52,7 @@ class Formbuilder
 	public function addSelect($name = "", $label = false, $options = array(), $selected = null, $attr = array()){
 		$this->markup .= "<div>";
 		$this->markup .= "<select id=\"$name\" name=\"$name\"";
-		$class = (isset($attr['class'])) ? "form {$attr['class']}" : "form";
+		$class = (isset($attr['class'])) ? "{$attr['class']}" : "form";
 		$this->markup .= " class=\"$class\"";
 		if (count($attr) > 0) {
 
@@ -78,7 +78,6 @@ class Formbuilder
 		$this->markup .= "<div>";
 		$this->markup .= "<textarea name=\"$name\" id=\"$name\"";
 		if (count($attr) > 0) {
-
 			foreach ($attr as $key => $val):
 				if ($key == "class") continue;
 				$this->markup .= " $key=\"$val\"";
@@ -91,13 +90,13 @@ class Formbuilder
 	}
 	public function addCheckbox($values=array(), $attr=array())
 	{
-		$this->markup .= "<div>";
+		$this->markup .= "<div class='field checkbox'>";
 		foreach ($values as $key => $item) {
-			$this->markup .= "<input type=\"checkbox\" name='$key' id='$key' value='$key'";
+			$this->markup .= "<div><input type=\"checkbox\" name='$key' id='$key' value='$key'";
 				foreach($attr as $key){
 					$this->markup.=$key;
 				};
-				$this->markup.="> <label for='$key'>$item</label>";
+				$this->markup.="> <label for='$key'>$item</label></div>";
 		}
 		$this->markup .= "</div>";
 		return $this;

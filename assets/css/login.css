@@ -16,7 +16,7 @@
 	margin-top: 52px;
 	justify-content: center;
 	display: flex;
-	/*padding: 0 150px;*/
+	padding: 0 110px;
 	flex-wrap: wrap;
 }
 
@@ -32,7 +32,7 @@
 	display: block;
 }
 .field{
-	margin: 0 40px;
+	margin: 20px auto;
 	height: 26px;
 	position: relative;
 }
@@ -65,16 +65,17 @@
 	font-size: 15px;
 	font-weight: normal;
 }
-.row>div:nth-child(2)>label{
+.row>div:nth-child(even)>label{
 	transform-origin: bottom right;
 	right: 0;
 }
-.row>div:nth-child(1)>label{
+.row>div:nth-child(odd)>label{
 	transform-origin: bottom left;
 }
-.row>div:nth-child(2)>input{
+.row>div:nth-child(even)>input{
 	text-align: right;
 }
+
 .row>div>input:focus ~ label.label{
 	-webkit-transition: transform .3s, color .3s;
 	-moz-transition: transform .3s, color .3s;
@@ -85,20 +86,22 @@
 	-moz-transform: translateY(-30px) scale(.75);
 	-ms-transform: translateY(-30px) scale(.75);
 	-o-transform: translateY(-30px) scale(.75);
-	transform: translateY(-30px) scale(.75);
+	transform: translateY(-20px) scale(.75);
 	color: #D19650;
 }
 .row>div:nth-child(1)>input:focus ~ label.label {
 	transform-origin: bottom left;
 }
-.row>div:nth-child(2)>input:focus ~ label.label {
+.row>div:nth-child(even)>input:focus ~ label.label {
 	transform-origin: bottom right;
 }
 .field > input:focus ~ .label::after {
 	content: ":";
 }
 .textfield {
-	/*flex-basis: 50%;*/
+	flex-basis: 36%;
+	flex-basis: 40%;
+
 }
 
 .field > input:focus ~ .underline {
@@ -129,7 +132,7 @@
 	-moz-transform: translateY(-30px) scale(.75);
 	-ms-transform: translateY(-30px) scale(.75);
 	-o-transform: translateY(-30px) scale(.75);
-	transform: translateY(-30px) scale(.75);
+	transform: translateY(-20px) scale(.75);
 }
 
 .activejs:after {

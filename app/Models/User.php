@@ -24,7 +24,7 @@ class User extends Model {
 		$pw = sha1($password . $salt) . ":" . $salt;
 
 		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, user_group, hash, is_active, created_at) Values (?,?,?,?,?,?,?,?)");
-		$stmt->bind_param("ssssisis",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at);
+		$stmt->bind_param("ssssisii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at);
 		$stmt->execute();
 		return $hash;
 	}
