@@ -18,7 +18,7 @@ class AdminController extends Controller {
 	private function checkGroup(){
 		if(Sessions::get('user_group')!=2){
 			$data['errors']="Must be Admin to access this page! If you think this is incorrect, contact administrator";
-			$this->view->render("index/home", $data);
+//			$this->view->render("index/home", $data);
 			header("Location:".APP_URL."admin");
 		}
 	}
