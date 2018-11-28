@@ -17,7 +17,7 @@ class UserController extends Controller {
 	}
 	private function checkGroup(){
 		if(Sessions::get('login')!=1||Sessions::get('user_group')!=0){
-			header("Location".APP_URL."login");
+			header("Location:".APP_URL."login");
 		}
 	}
 }
