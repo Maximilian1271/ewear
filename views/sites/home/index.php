@@ -1,4 +1,3 @@
-<?php //print_r($errors);?>
 <?php echo $css;?>
 <div class="container">
 	<div class="slider">
@@ -16,4 +15,30 @@
 		<img class="slide" alt="productimage" src="./assets/images/adolescent-casual-cute-428338.jpg" style="">
 	</div>
 	<?php echo $js ?>
+	<div class="grid">
+		<div class="desc">
+			<h2>Group Headline</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+		</div>
+		<a href="prod/1"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img"></a>
+		<a href="prod/2"><img src="assets/images/brick-wall-casual-cool-769733.jpg" alt="Product Image" class="img2"></a>
+<!--		---->
+		<a href="prod/3"><img src="assets/images/abs-adult-casual-936011.jpg" alt="Product Image" class="img3"></a>
+		<a href="prod/"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img4"></a>
+		<a href="prod/"><img src="assets/images/brick-wall-casual-cool-769733.jpg" alt="Product Image" class="img5"></a>
+		<a href="prod/"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img6"></a>
+	</div>
+	<div class="grid">
+		<div class="desc">
+			<h2>Group Headline</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+		</div>
+		<a href="prod/"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img"></a>
+		<a href="prod/"><img src="assets/images/brick-wall-casual-cool-769733.jpg" alt="Product Image" class="img2"></a>
+		<!--		---->
+		<a href="prod/"><img src="assets/images/abs-adult-casual-936011.jpg" alt="Product Image" class="img3"></a>
+		<a href="prod/"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img4"></a>
+		<a href="prod/"><img src="assets/images/brick-wall-casual-cool-769733.jpg" alt="Product Image" class="img5"></a>
+		<a href="prod/"><img src="assets/images/blue-blue-skies-blue-sky-1195548.jpg" alt="Product Image" class="img6"></a>
+	</div>
 </div>

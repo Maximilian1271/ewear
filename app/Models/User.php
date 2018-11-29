@@ -29,7 +29,7 @@ class User extends Model {
 		return $hash;
 	}
 	public function getUserByUname($username){
-		$res = $this->db->query("SELECT uname, password, is_active FROM {$this->table_name} WHERE uname ='$username'");
+		$res = $this->db->query("SELECT * FROM {$this->table_name} WHERE uname ='$username'");
 		$account = $res->fetch_assoc();
 		return $account;
 	}
@@ -77,10 +77,10 @@ class User extends Model {
 	public function updateUserById($id=null, $data){
 		if ($id!=null){
 			$user_data=[
-				"fname"=> $data['fname'],
-				"lname"=>$data['lname'],
-				"tel"=>$data['tel'],
-				"country"=>$data['country']
+				"name"=> $data['name'],
+				"surname"=>$data['surname'],
+				"address"=>$data['address'],
+				"zip"=>$data['zip']
 			];
 			$user_data=json_encode($user_data);
 			$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");

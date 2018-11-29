@@ -39,7 +39,6 @@ class Login extends GuestController {
 			$user=new User();
 			$account=$user->getUserByUname($_POST['uname']);
 			$pw_hash=explode(":", $account['password']);
-			print_r($account);
 
 			if ($account["uname"] == $_POST['uname'] && sha1($_POST['pass'] . $pw_hash[1]) == $pw_hash[0]) {
 				if($account['is_active']==1){
@@ -47,8 +46,6 @@ class Login extends GuestController {
 					Sessions::set("login", true);
 					Sessions::set("user_group", 1);
 					header("Location:".APP_URL."home");
-//					$_SESSION['uname']=$account['uname'];
-//					$_SESSION['login']=true;
 				} else return $val->getErrors(5);
 			} else return $val->getErrors(6);
 		} else return $val->getErrors();

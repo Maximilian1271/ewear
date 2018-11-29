@@ -7,6 +7,7 @@
 	padding-top: 45px;
 	margin-left: auto;
 	margin-right: auto;
+	padding-bottom: 45px;
 }
 .login>h2{
 	font-weight: normal;
@@ -39,7 +40,6 @@
 
 .field:last-child {
 	margin-top: 72px;
-	margin-bottom: 108px;
 }
 .field > .label {
 	-webkit-user-select: none;

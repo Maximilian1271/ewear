@@ -18,8 +18,7 @@ class GuestController extends Controller
 	}
 	public function checkGroup(){
 		if (Sessions::get('login')==1){
-			header('Location:'.APP_URL."dashboard");
-			exit();
+			header('Location:'.APP_URL."home");
 		}
 	}
 }
