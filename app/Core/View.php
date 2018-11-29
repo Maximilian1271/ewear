@@ -18,9 +18,6 @@ class View
 		} else {
 			return false;
 		}
-		/*		if (file_exists("./assets/css/{$filename}")){
-					echo "<link rel=\"stylesheet\" href=\"/mvc/assets/css/{$filename}\">";
-				}*/
 	}
 	private function loadJS(){
 		$markup = "";

@@ -1,3 +1,4 @@
+<?php //print_r($errors);?>
 <?php echo $css;?>
 <div class="container">
 	<div class="slider">
