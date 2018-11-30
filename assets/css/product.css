@@ -1,0 +1,44 @@
+.content>.prodimg{
+	width: 30%;
+}
+.content>.text{
+	float: right;
+}
+.content>.text>*{
+	text-align: right;
+}
+.content>.text>h2{
+	font-size: 30px;
+}
+.content>.text>h3{
+	color: #D19650;
+	font-size: 25px;
+}
+.content>.text{
+	width: 45%;
+}
+.content>.text>p{
+	font-size: 12px;
+	line-height: 35px;
+}
+.content>.text>hr{
+	border: 1px solid #707070;
+}
+.content>.text>ul{
+	padding: 0;
+	list-style: none;
+	display: flex;
+	width: 450px;
+	justify-content: space-between;
+}
+.content>.text>.quantity{
+	text-align: left;
+}
+.content>.text>.quantity>.amount{
+	padding: 0;
+	width: 50px;
+	text-align: center;
+}
+.content>.text>.submit{
+	float: right;
+}

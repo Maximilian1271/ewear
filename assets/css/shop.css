@@ -1,0 +1,59 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	grid-template-areas: "product1 product2 product3 product4";
+}
+
+.grid:nth-child(1n) { grid-area: product1; }
+
+.grid:nth-child(2n) { grid-area: product2; }
+
+.grid:nth-child(3n) { grid-area: product3; }
+
+.grid:nth-child(4n) { grid-area: product4; }
+
+.product{
+	height: 300px;
+	width: 200px;
+	margin: 0 auto;
+	position: relative;
+	-webkit-transition: background-color .5s;
+	-moz-transition: background-color .5s;
+	-ms-transition: background-color .5s;
+	-o-transition: background-color .5s;
+	transition: background-color .5s;
+}
+.product>div.desc, .product>div.title{
+	-webkit-transition: opacity .5s;
+	-moz-transition: opacity .5s;
+	-ms-transition: opacity .5s;
+	-o-transition: opacity .5s;
+	transition: opacity .5s;
+	opacity: 0;
+}
+.product:hover>.title+.desc{
+	opacity: 1;
+}
+.product:hover>.title{
+	opacity: 1;
+}
+.product:hover{
+	background-color: hsla(0, 0%, 0%, 0.05);
+}
+.product>img.prodimg{
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+	left: 0;
+	top: 0;
+}
+.desc{
+	position: absolute;
+	bottom: 40px;
+}
+.title, .desc{
+	text-align: center;
+}
