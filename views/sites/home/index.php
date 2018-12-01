@@ -1,5 +1,4 @@
 <?php echo $css;?>
-<?php print_r($_SESSION)?>
 <div class="container">
 	<div class="slider">
 		<div class="nav">
