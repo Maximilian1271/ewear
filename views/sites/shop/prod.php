@@ -1,6 +1,7 @@
 <?php echo $css;?>
 <div class="container">
 	<div class="content">
+		<?php if(!empty($prod)):?>
 		<img class="prodimg" src="<?php echo APP_URL.$prod['image'] ?>" alt="product image">
 		<div class="text">
 			<h2><?php echo $prod['title']?></h2>
@@ -29,5 +30,8 @@
 			</div>
 			<input type="submit" name="submit" id="submit" class="submit">
 		</div>
+		<?php else:?>
+		There has been an error with your query. Please try something different
+		<?php endif;?>
 	</div>
 </div>

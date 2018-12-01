@@ -32,17 +32,21 @@ class User extends UserController
 			->addInput("text", "surname", "Surname", ["class"=>"jsfocusactive", "value"=>$json['surname']])
 			->addInput("text", "address", "Street Address", ["class"=>"jsfocusactive", "value"=>$json['address']])
 			->addInput("text", "zip", "ZIP Code", ["class"=>"jsfocusactive", "value"=>$json['zip']])
-			->addButton("submit", "Update");
+			->addButton("submit", "Update")
+			->addButton("remove", "Remove Account", ["class"=>"remove", "onclick"=>"var x=confirm('Are you sure you want to delete your Account?'); if(x==false){return false}"]);
 		$data['form']=$form->output();
 		$data['css']=$this->insertCSS("login.css");
 		$data['css2']=$this->insertCSS("user.css");
 		$data['js']=$this->insertJS("animationworkaround.js");
+		$user=new \App\Models\User();
+		$userid=$user->getUserByUname(Sessions::get("uname"));
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
-			if ($this->validate()==false){
-				$user=new \App\Models\User();
-				$userid=$user->getUserByUname(Sessions::get("uname"));
+			if ($this->validate()==false && !isset($_POST['remove'])){
 				$user->updateUserById($userid['id'], $_POST);
 				header("Location:".APP_URL."user");
+			}
+			if(isset($_POST['remove'])){
+				$this->remove($userid['id']);
 			}
 			else{
 				$data['errors']=$this->validate();
@@ -57,5 +61,11 @@ class User extends UserController
 		if ($val->getErrors()!=false){
 			return $val->getErrors();
 		}else return false;
+	}
+	private function remove($id){
+		$user=new \App\Models\User();
+		if($user->delUserById($id)==true){
+			Logout::index();
+		}
 	}
 }

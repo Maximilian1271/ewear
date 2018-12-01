@@ -11,3 +11,6 @@
 .field:last-child{
 	margin-top: 20px;
 }
+.remove{
+	color: red;
+}

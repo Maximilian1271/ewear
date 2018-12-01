@@ -44,7 +44,7 @@ class Login extends GuestController {
 				if($account['is_active']==1){
 					Sessions::set("uname", $account['uname']);
 					Sessions::set("login", true);
-					Sessions::set("user_group", 1);
+					Sessions::set("user_group", $account['user_group']);
 					header("Location:".APP_URL."home");
 				} else return $val->getErrors(5);
 			} else return $val->getErrors(6);

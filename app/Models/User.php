@@ -86,4 +86,10 @@ class User extends Model {
 			$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
 		}
 	}
+	public function delUserById($id=null){
+		if ($id!=null){
+			$this->db->query("DELETE FROM {$this->table_name} WHERE id=$id");
+			return true;
+		}
+	}
 }
