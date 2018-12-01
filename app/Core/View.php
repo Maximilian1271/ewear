@@ -12,7 +12,7 @@ class View
 		if (isset($_SESSION['login'])){
 			$checkuser=new User();
 			if($checkuser->checkLock(Sessions::get("id"))==true){
-				header("Location: logout");
+				header("Location:".APP_URL."logout");
 			}
 		}
 	}

@@ -54,7 +54,6 @@ class Formbuilder{
 		$class = (isset($attr['class'])) ? "{$attr['class']}" : "form";
 		$this->markup .= " class=\"$class\"";
 		if (count($attr) > 0) {
-
 			foreach ($attr as $key => $val):
 				if ($key == "class") continue;
 				$this->markup .= " $key=\"$val\"";

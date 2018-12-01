@@ -116,4 +116,7 @@ class User extends Model {
 		$res=$this->db->query("UPDATE {$this->table_name} SET locked=0 WHERE id=$id");
 		return true;
 	}
+	public function getRoles(){
+		return $this->db->query("SELECT Role, id FROM roles")->fetch_all(MYSQLI_ASSOC);
+	}
 }

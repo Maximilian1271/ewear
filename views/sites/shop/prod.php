@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="content">
 		<?php if(!empty($prod)):?>
-		<img class="prodimg" src="<?php echo APP_URL.$prod['image'] ?>" alt="product image">
+		<img class="prodimg" src="<?php if($prod['image']==""){echo APP_URL."assets/images/product/none.jpg";}else echo APP_URL.$prod['image']?>" alt="product image">
 		<div class="text">
 			<h2><?php echo $prod['title']?></h2>
 			<h3><?php echo $prod['base_price']?></h3>

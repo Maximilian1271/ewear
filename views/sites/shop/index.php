@@ -6,7 +6,7 @@
 			<div class="product">
 					<div class="title"><?php echo $product['title']?></div>
 					<div class="desc"><?php echo $product['product_desc']?></div>
-				<img class="prodimg" src="<?php echo $product['image']?>" alt="product image">
+				<img class="prodimg" src="<?php if($product['image']==""){echo "assets/images/product/none.jpg";}else echo $product['image']?>" alt="product image">
 			</div>
 		</a>
 		<?php endforeach;?>

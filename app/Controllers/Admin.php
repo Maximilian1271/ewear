@@ -11,6 +11,7 @@ namespace app\Controllers;
 
 use App\Core\AdminController;
 use App\Libs\Formbuilder;
+use App\Libs\Sessions;
 
 class Admin extends AdminController
 {
@@ -53,12 +54,15 @@ class Admin extends AdminController
 				->addInput("email", "email", "E-Mail Address", ["value"=>$user['email']])
 				->addInput("text", "address", "Street Address", ["value"=>$json['address']])
 				->addInput("text", "zip", "ZIP Code", ["value"=>$json['zip']])
-				->addButton("submit", "Update {$user['uname']}");
+				->addButton("submit", "Update \"{$user['uname']}\"");
 			if($user['locked']==1){
 				$edit->addButton("unlock", "Unlock User");
 			}
 			elseif($user['locked']==0){
-				$edit->addButton("lock", "Lock User");
+				if ($user['id']==Sessions::get('id')){
+					$edit->addButton("selflock", "Cannot lock own user", ["disabled"=>""]);
+				}
+				else $edit->addButton("lock", "Lock User");
 			}
 			if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
 				$user=new \App\Models\User();
