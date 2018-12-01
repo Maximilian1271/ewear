@@ -18,6 +18,7 @@ class Register extends GuestController
 {
 	public function index(){
 		$data['css']=$this->insertCSS("register.css");
+		$data['js']=$this->insertJS("animationworkaround.js");
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->register();
 		}

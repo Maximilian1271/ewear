@@ -1,0 +1,50 @@
+.dashboard>div{
+	display: flex;
+}
+.dashboard>div>h2{
+	text-align: center;
+	flex-basis: 33.333%;
+}
+.usercontrol>table{
+	border-spacing: 0;
+	width: 100%;
+	text-align: center;
+}
+.usercontrol>table>thead>tr>*{
+	border-bottom: 1px solid black;
+}
+.usercontrol>table>tbody>tr:nth-child(odd){
+	background-color: #8080802e;
+}
+.usercontrol>table>tbody>tr.admin{
+	background-color: #ff8080;
+}
+.usercontrol>table>tbody>tr.locked{
+	background-color: rgba(0, 0, 0, 0.50);
+}
+.useredit>form>.row>div.field{
+	display: flex;
+	/*flex-direction: row;*/
+}
+.useredit>form>.row>div.field>input.form{
+	order: 2;
+	width: 30%;
+}
+.useredit>form>.row>div.field>label{
+	order: 1;
+	margin-right: 10px;
+	width: 250px;
+}
+.useredit>form>.row>div.field>label::after{
+	content: ':';
+}
+.useredit>form{
+	margin-top: 40px;
+}
+.useredit>form>.row>div.button:first-child{
+	margin: 0;
+}
+.useredit>form>.row>div.button{
+	display: inline;
+	margin: 0 10px;
+}

@@ -11,9 +11,9 @@
 				<span class="dot hover" onclick="currentDiv(3)"></span>
 			</div>
 		</div>
-		<img class="slide" alt="productimage" src="./assets/images/bag-eyewear-fashion-833052.jpg" style="">
 		<img class="slide" alt="productimage" src="./assets/images/adult-beautiful-body-301320.jpg" style="">
 		<img class="slide" alt="productimage" src="./assets/images/adolescent-casual-cute-428338.jpg" style="">
+		<img class="slide" alt="productimage" src="./assets/images/bag-eyewear-fashion-833052.jpg" style="">
 	</div>
 	<?php echo $js ?>
 	<div class="grid">

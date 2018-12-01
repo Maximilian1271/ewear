@@ -18,6 +18,7 @@ use App\Models\User;
 class Login extends GuestController {
 	public function index(){
 		$data['css']=$this->insertCSS("login.css");
+		$data['js']=$this->insertJS("animationworkaround.js");
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->login();
 		}
@@ -42,10 +43,13 @@ class Login extends GuestController {
 
 			if ($account["uname"] == $_POST['uname'] && sha1($_POST['pass'] . $pw_hash[1]) == $pw_hash[0]) {
 				if($account['is_active']==1){
-					Sessions::set("uname", $account['uname']);
-					Sessions::set("login", true);
-					Sessions::set("user_group", $account['user_group']);
-					header("Location:".APP_URL."home");
+					if ($account['locked']!=1){
+						Sessions::set("uname", $account['uname']);
+						Sessions::set("id", $account['id']);
+						Sessions::set("login", true);
+						Sessions::set("user_group", $account['roles_fs']);
+						header("Location:".APP_URL."home");
+					}else return $val->getErrors(9);
 				} else return $val->getErrors(5);
 			} else return $val->getErrors(6);
 		} else return $val->getErrors();

@@ -82,6 +82,9 @@ class Validator
 			case 8:
 				array_push($this->error_msg, "Email already set");
 				break;
+			case 9:
+				array_push($this->error_msg, "Your Account has been locked by a Member of Staff");
+				break;
 			default:
 				array_push($this->error_msg, "{$this->name} is invalid");
 		}

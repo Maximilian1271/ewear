@@ -1,11 +1,10 @@
 <?php
 namespace App\Libs;
-class Formbuilder
-{
+class Formbuilder{
 	private $markup="";
 	public function __construct($name ,$method="POST", $action="", $enctype=false){
-		$this->markup="<script src='assets/js/animationworkaround.js'></script>\n";
-		$this->markup.="<form method='$method' ";
+//		$this->markup="<script src='assets/js/animationworkaround.js'></script>\n";
+		$this->markup="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";
 		$this->markup.=($enctype)?"enctype\"multipart/form-dat>":">";
@@ -97,13 +96,6 @@ class Formbuilder
 			$this->markup.="<span>$item</span>";
 			$this->markup.="</label>";
 		}
-		/*foreach ($values as $key => $item) {
-			$this->markup .= "<div><input type=\"checkbox\" name='$key' id='$key' value='$key'";
-			foreach($attr as $key){
-				$this->markup.=$key;
-			};
-			$this->markup.="> <label for='$key'>$item</label></div>";
-		}*/
 		$this->markup .= "</div>";
 		return $this;
 	}

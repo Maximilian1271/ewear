@@ -8,7 +8,7 @@ class User extends Model {
 	protected $table_name = "users";
 
 	public function setUser($uname, $email, $password, $name, $surname, $address, $zip, $newsletter){
-		$user_group = 0;
+		$user_group = 1;
 		$created_at = time();
 		$data = [
 			'name'=> $name,
@@ -23,7 +23,7 @@ class User extends Model {
 		$salt = $this->generateSalt();
 		$pw = sha1($password . $salt) . ":" . $salt;
 
-		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, user_group, hash, is_active, created_at, newsletter) Values (?,?,?,?,?,?,?,?,?)");
+		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, roles_fs, hash, is_active, created_at, newsletter) Values (?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssisiii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at, $newsletter);
 		$stmt->execute();
 		return $hash;
@@ -66,7 +66,7 @@ class User extends Model {
 	}
 	public function getUserbyId($id=null){
 		if ($id!=null){
-			$res=$this->db->query("SELECT * FROM {$this->table_name} WHERE id=$id");
+			$res=$this->db->query("SELECT users.*,roles.Role FROM {$this->table_name} LEFT JOIN roles ON users.roles_fs=roles.id WHERE users.id=$id");
 
 			if ($res->num_rows>0){
 				return $res->fetch_assoc();
@@ -83,7 +83,15 @@ class User extends Model {
 				"zip"=>$data['zip']
 			];
 			$user_data=json_encode($user_data);
-			$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
+			if (isset($data['uname'])&&isset($data['email'])){
+				$this->db->query("UPDATE {$this->table_name} SET email='{$data['email']}',uname='{$data['uname']}', data='$user_data' WHERE id=$id");
+				return true;
+			}
+			else{
+				$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
+				return true;
+			}
+
 		}
 	}
 	public function delUserById($id=null){
@@ -91,5 +99,21 @@ class User extends Model {
 			$this->db->query("DELETE FROM {$this->table_name} WHERE id=$id");
 			return true;
 		}
+	}
+	public function checkLock($id){
+		$res=$this->db->query("SELECT locked FROM {$this->table_name} WHERE id=$id")->fetch_row();
+		return $res[0];
+	}
+	public function getAll(){
+		$res=$this->db->query("SELECT * FROM {$this->table_name}")->fetch_all(MYSQLI_ASSOC);
+		return $res;
+	}
+	public function lockUserById($id){
+		$res=$this->db->query("UPDATE {$this->table_name} SET locked=1 WHERE id=$id");
+		return true;
+	}
+	public function unlockUserById($id){
+		$res=$this->db->query("UPDATE {$this->table_name} SET locked=0 WHERE id=$id");
+		return true;
 	}
 }
