@@ -38,7 +38,10 @@ class User extends Model {
 	}
 
 	public function setActiveStatus($status = 1){
-		$this->db->query("UPDATE {$this->table_name} SET is_active = $status");
+		$stmt=$this->db->prepare("UPDATE {$this->table_name} SET is_active=?");
+		$stmt->bind_param("i", $status);
+		$stmt->execute();
+//		$this->db->query("UPDATE {$this->table_name} SET is_active = $status");
 	}
 
 	public function checkActiveStatusByHash($hash = null){
@@ -84,11 +87,17 @@ class User extends Model {
 			];
 			$user_data=json_encode($user_data);
 			if (isset($data['uname'])&&isset($data['email'])){
-				$this->db->query("UPDATE {$this->table_name} SET email='{$data['email']}',uname='{$data['uname']}', data='$user_data' WHERE id=$id");
+				$stmt=$this->db->prepare("UPDATE {$this->table_name} SET email=?, uname=?, data=? WHERE id=$id");
+				$stmt->bind_param("sss", $data['email'], $data['uname'], $user_data);
+				$stmt->execute();
+//				$this->db->query("UPDATE {$this->table_name} SET email='{$data['email']}',uname='{$data['uname']}', data='$user_data' WHERE id=$id");
 				return true;
 			}
 			else{
-				$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
+				$stmt=$this->db->prepare("UPDATE {$this->table_name} SET data=? WHERE id=$id");
+				$stmt->bind_param("s", $user_data);
+				$stmt->execute();
+//				$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
 				return true;
 			}
 
