@@ -10,8 +10,8 @@
 				<a href="<?php echo APP_URL."logout"?>">Log Out</a>
 			<?php else: ?>
 				<a href="<?php echo APP_URL."login"?>">Log In</a> <i>|</i> <a href="<?php echo APP_URL."register"?>">Register</a>
-				<a href="<?php echo APP_URL."cart"?>"><?php require "assets/images/baseline-shopping_cart-24px.svg";?></a>
 			<?php endif;?>
+			<a href="<?php echo APP_URL."cart"?>"><?php require "assets/images/baseline-shopping_cart-24px.svg";?></a>
 		</div>
 	</div>
 </aside>

@@ -26,7 +26,14 @@ class User extends Model {
 		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, roles_fs, hash, is_active, created_at, newsletter) Values (?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssisiii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at, $newsletter);
 		$stmt->execute();
+		$this->createCart($uname);
 		return $hash;
+	}
+	public function createCart($uname=null){
+		if($uname!=null){
+			$userid=$this->getUserByUname($uname);
+			$this->db->query("INSERT INTO cart (user_fs) VALUE ({$userid['id']})");
+		}
 	}
 	public function getUserByUname($username){
 		$res = $this->db->query("SELECT * FROM {$this->table_name} WHERE uname ='$username'");
@@ -118,11 +125,11 @@ class User extends Model {
 		return $res;
 	}
 	public function lockUserById($id){
-		$res=$this->db->query("UPDATE {$this->table_name} SET locked=1 WHERE id=$id");
+		$this->db->query("UPDATE {$this->table_name} SET locked=1 WHERE id=$id");
 		return true;
 	}
 	public function unlockUserById($id){
-		$res=$this->db->query("UPDATE {$this->table_name} SET locked=0 WHERE id=$id");
+		$this->db->query("UPDATE {$this->table_name} SET locked=0 WHERE id=$id");
 		return true;
 	}
 	public function getRoles(){
