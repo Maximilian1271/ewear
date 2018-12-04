@@ -1,6 +1,6 @@
 <?php echo $css;?>
 <div class="container">
-	<div class="usercontrol">
+	<div class="control">
 		<h2>UserControl</h2>
 		<table>
 			<thead>

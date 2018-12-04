@@ -42,3 +42,47 @@
 .content>.text>.submit{
 	float: right;
 }
+input[type="radio"]{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.size>label{
+	position: relative;
+}
+input[type="radio"]:checked+label:after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	border-bottom: 1px solid black;
+}.text>.order{
+	 display: flex;
+	 text-align: initial;
+	 flex-direction: column;
+ }
+ .order>.size{
+	 display: flex;
+	 flex-basis: 100%;
+	 justify-content: space-between;
+ }
+ .size>label{
+	 width: 30px;
+	 text-align: center;
+	 cursor: pointer;
+ }
+ .order>*{
+	 margin-top: 15px;
+ }
+ .order>input.submit{
+	 height: 26px;
+	 background-color: #D19650;
+	 border: 1px solid black;
+	 cursor: pointer;
+ }
+.order>input.submit:disabled{
+	height: 26px;
+	background-color: white;
+	border: 1px solid black;
+}

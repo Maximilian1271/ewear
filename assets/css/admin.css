@@ -5,30 +5,33 @@
 	text-align: center;
 	flex-basis: 33.333%;
 }
-.usercontrol>table{
+.control>table{
 	border-spacing: 0;
 	width: 100%;
 	text-align: center;
 }
-.usercontrol>table>thead>tr>*{
+.control>table>thead>tr>*{
 	border-bottom: 1px solid black;
 }
-.usercontrol>table>tbody>tr:nth-child(odd){
+.control>table>tbody>tr:nth-child(odd){
 	background-color: #8080802e;
 }
-.usercontrol>table>tbody>tr.admin{
+.control>table>tbody>tr.admin{
 	background-color: #ff8080;
 }
-.usercontrol>table>tbody>tr.locked{
+.control>table>tbody>tr.locked, .control>table>tbody>tr.outstock{
 	background-color: rgba(0, 0, 0, 0.50);
 }
 .useredit>form>.row>div.field{
 	display: flex;
 	/*flex-direction: row;*/
 }
-.useredit>form>.row>div.field>input.form{
+.useredit>form>.row>div.field>input.form,.useredit>form>.row>div.field>textarea{
 	order: 2;
 	width: 30%;
+}
+.useredit>form>.row>div.field>textarea{
+	height: 300px;
 }
 .useredit>form>.row>div.field>label{
 	order: 1;

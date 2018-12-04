@@ -12,6 +12,7 @@ namespace app\Controllers;
 use App\Core\AdminController;
 use App\Libs\Formbuilder;
 use App\Libs\Sessions;
+use app\Models\Product;
 
 class Admin extends AdminController
 {
@@ -84,5 +85,54 @@ class Admin extends AdminController
 			$data['user']=$user;
 			$this->view->render("admin/useredit", $data);
 		}else header("Location:".APP_URL."admin/user");
+	}
+	public function product($id=null){
+		$prod=new Product();
+		$markup="";
+		foreach($prod->getAll() as $product){
+			$img=explode("/", $product['image']);
+			$img=end($img);
+			$date=date("D M j Y, G:i:s", $product['created_at']);
+			if ($product['in_stock']==="1"){
+				$markup.="<tr class='instock'>";
+				$status="yes";
+			}
+			elseif ($product['in_stock']==="0"){
+				$markup.="<tr class='outstock'>";
+				$status="no";
+			}
+
+			$markup.="<td><a href=\"".APP_URL."shop/prod/{$product['title']}\">{$product['title']}</a></td><td>{$product['product_desc']}</td><td>{$product['base_price']}</td><td>$img</td><td>$date</td><td>$status</td><td>{$product['CategoryName']}</td>";
+			$markup.="<td><a href='prodedit/{$product['id']}'>Edit</a></td>";
+			$markup.="</tr>";
+		}
+		$data['css']=$this->insertCSS("admin.css");
+		$data['prod']=$markup;
+		$this->view->render("admin/product", $data);
+	}
+	public function prodedit($id){
+
+		$product=new Product();
+		$selected=$product->getProductById($id);
+		$form=new Formbuilder("Prodedit", "POST", "", true);
+		$form->addInput("text", "Title", "Title", ["value"=>$selected['title']])
+		->addInput("text", "DescShort", "Short Text", ["value"=>$selected['product_desc']])
+		->addInput("number", "InStock", "In Stock", ["value"=>$selected['in_stock'], "min"=>"0", "max"=>"1"])
+		->addInput("number", "basePrice", "Base Price", ["value"=>$selected['base_price'], "min"=>"0"])
+		->addTextarea("desLong", "Long Text", $selected['product_desc_long'])
+		->addButton("update", "update");
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
+			if($product->updateProductById($id, $_POST)){
+				header("Location: ".APP_URL."admin/prodedit/".$id);
+			}
+			else die("An error has occured");
+		}
+		$data['prod']=$selected;
+		$data['form']=$form->output();
+		$data['css']=$this->insertCSS("admin.css");
+		$this->view->render("admin/prodedit", $data);
+	}
+	public function productAdd(){
+		$this->view->render("admin/productadd");
 	}
 }

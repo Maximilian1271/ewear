@@ -10,9 +10,21 @@
 				<span class="dot hover" onclick="currentDiv(3)"></span>
 			</div>
 		</div>
-		<img class="slide" alt="productimage" src="./assets/images/adult-beautiful-body-301320.jpg" style="">
-		<img class="slide" alt="productimage" src="./assets/images/adolescent-casual-cute-428338.jpg" style="">
-		<img class="slide" alt="productimage" src="./assets/images/bag-eyewear-fashion-833052.jpg" style="">
+		<div class="slide" style="color: black">
+			<h2>Headline 1</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+			<img alt="productimage" src="./assets/images/adult-beautiful-body-301320.jpg">
+		</div>
+		<div class="slide" style="color: black">
+			<h2>Headline 2</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+			<img alt="productimage" src="./assets/images/adolescent-casual-cute-428338.jpg">
+		</div>
+		<div class="slide" style="color: white;">
+			<h2>Headline 3</h2>
+			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+			<img alt="productimage" src="./assets/images/bag-eyewear-fashion-833052.jpg">
+		</div>
 	</div>
 	<?php echo $js ?>
 	<div class="grid">

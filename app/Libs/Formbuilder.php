@@ -7,7 +7,7 @@ class Formbuilder{
 		$this->markup="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";
-		$this->markup.=($enctype)?"enctype\"multipart/form-dat>":">";
+		$this->markup.=($enctype)?"enctype=\"multipart/form-dat\">":">";
 //		$csrf= set_csrf();
 //		$this->markup.="<input type='hidden' value='$csrf' name='csrf'>";
 		$this->markup.="<div class='row'>\n";
@@ -73,7 +73,7 @@ class Formbuilder{
 		return $this;
 	}
 	public function addTextarea($name = "", $label = false, $value = "", $attr = array()){
-		$this->markup .= "<div>";
+		$this->markup .= "<div class='field'>";
 		$this->markup .= "<textarea name=\"$name\" id=\"$name\"";
 		if (count($attr) > 0) {
 			foreach ($attr as $key => $val):
