@@ -18,7 +18,7 @@ class User extends Model {
 		];
 		$data = json_encode($data);
 		$hash = uniqid();
-		$is_active = 0;
+		$is_active = 1;
 
 		$salt = $this->generateSalt();
 		$pw = sha1($password . $salt) . ":" . $salt;
@@ -26,14 +26,9 @@ class User extends Model {
 		$stmt = $this->db->prepare("INSERT INTO {$this->table_name} (uname, email, password, data, roles_fs, hash, is_active, created_at, newsletter) Values (?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("ssssisiii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at, $newsletter);
 		$stmt->execute();
-		$this->createCart($uname);
+		$cart=new Cart();
+		$cart->createCart($uname);
 		return $hash;
-	}
-	public function createCart($uname=null){
-		if($uname!=null){
-			$userid=$this->getUserByUname($uname);
-			$this->db->query("INSERT INTO cart (user_fs) VALUE ({$userid['id']})");
-		}
 	}
 	public function getUserByUname($username){
 		$res = $this->db->query("SELECT * FROM {$this->table_name} WHERE uname ='$username'");
@@ -48,7 +43,6 @@ class User extends Model {
 		$stmt=$this->db->prepare("UPDATE {$this->table_name} SET is_active=?");
 		$stmt->bind_param("i", $status);
 		$stmt->execute();
-//		$this->db->query("UPDATE {$this->table_name} SET is_active = $status");
 	}
 
 	public function checkActiveStatusByHash($hash = null){
@@ -97,14 +91,12 @@ class User extends Model {
 				$stmt=$this->db->prepare("UPDATE {$this->table_name} SET email=?, uname=?, data=? WHERE id=$id");
 				$stmt->bind_param("sss", $data['email'], $data['uname'], $user_data);
 				$stmt->execute();
-//				$this->db->query("UPDATE {$this->table_name} SET email='{$data['email']}',uname='{$data['uname']}', data='$user_data' WHERE id=$id");
 				return true;
 			}
 			else{
 				$stmt=$this->db->prepare("UPDATE {$this->table_name} SET data=? WHERE id=$id");
 				$stmt->bind_param("s", $user_data);
 				$stmt->execute();
-//				$this->db->query("UPDATE {$this->table_name} SET data='$user_data' WHERE id=$id");
 				return true;
 			}
 

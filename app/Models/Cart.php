@@ -16,4 +16,10 @@ class Cart extends Model{
 	public function getCartById($id){
 		return $this->db->query("SELECT * FROM {$this->table_name} WHERE user_fs=$id")->fetch_assoc();
 	}
+	public function createCart($uname=null){
+		if($uname!=null){
+			$userid=$this->getUserByUname($uname);
+			$this->db->query("INSERT INTO {$this->table_name} (user_fs) VALUE ({$userid['id']})");
+		}
+	}
 }
