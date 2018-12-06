@@ -1,4 +1,3 @@
-<?php echo $css?>
 <div class="container">
 	<h2>Editing user <?php echo $user['uname']." with id ".$user['id']?></h2>
 	<div class="useredit">

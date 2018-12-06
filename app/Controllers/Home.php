@@ -12,8 +12,10 @@ use App\Core\Controller;
 class Home extends Controller
 {
 	public function index(){
-		$data['css']=$this->insertCSS("home.css");
-		$data['js']=$this->insertJS("slider.js");
-		$this->view->render("home/index", $data);
+//		$data['css']=$this->insertCSS("home.css");
+		$this->view->files_css=['home.css'];
+//		$data['js']=$this->insertJS("slider.js");
+		$this->view->files_js=['slider.js'];
+		$this->view->render("home/index");
 	}
 }

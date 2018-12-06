@@ -1,4 +1,3 @@
-<?php echo $css;?>
 <div class="container">
 	<div class="slider">
 		<div class="nav">
@@ -26,7 +25,6 @@
 			<img alt="productimage" src="./assets/images/bag-eyewear-fashion-833052.jpg">
 		</div>
 	</div>
-	<?php echo $js ?>
 	<div class="grid">
 		<div class="desc">
 			<h2>Group Headline</h2>

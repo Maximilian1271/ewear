@@ -1,5 +1,3 @@
-<?php echo $css;?>
-<?php echo $js;?>
 <div class="container">
 	<div class="login">
 		<h2>Register</h2>

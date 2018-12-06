@@ -1,4 +1,3 @@
-<?php echo $css; echo $css2?>
 <div class="container">
 	<div class="login">
 		<?php

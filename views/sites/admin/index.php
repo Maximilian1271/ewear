@@ -1,4 +1,3 @@
-<?php echo $css?>
 <div class="container">
 	<div class="dashboard">
 		<div>

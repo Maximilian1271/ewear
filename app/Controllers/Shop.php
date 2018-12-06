@@ -17,7 +17,8 @@ class Shop extends Controller
 	public function index(){
 		$product=new Product();
 		$data['prod']=$product->getAll();
-		$data['css']=$this->insertCSS("shop.css");
+//		$data['css']=$this->insertCSS("shop.css");
+		$this->view->files_css=['shop.css'];
 		$this->view->render("shop/index", $data);
 	}
 	public function prod($parm){
@@ -26,7 +27,11 @@ class Shop extends Controller
 
 		}
 		$data['prod']=$product->getProduct($parm);
-		$data['css']=$this->insertCSS("product.css");
+//		$data['css']=$this->insertCSS("product.css");
+		$this->view->files_css=['product.css'];
 		$this->view->render("shop/prod", $data);
+	}
+	public function search(){
+
 	}
 }

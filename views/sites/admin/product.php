@@ -1,4 +1,3 @@
-<?php echo $css;?>
 <div class="container">
 	<div class="control">
 	<h2>ProductControl</h2>

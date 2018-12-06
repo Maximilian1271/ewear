@@ -1,4 +1,3 @@
-<?php echo $css;?>
 <?php
 $ref=isset($_SERVER['HTTP_REFERER'])?explode("/", $_SERVER['HTTP_REFERER']):"";
 if(isset($_SERVER['HTTP_REFERER'])&&end($ref)=="register"):?>

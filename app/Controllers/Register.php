@@ -17,8 +17,10 @@ use App\Models\User;
 class Register extends GuestController
 {
 	public function index(){
-		$data['css']=$this->insertCSS("register.css");
-		$data['js']=$this->insertJS("animationworkaround.js");
+//		$data['css']=$this->insertCSS("register.css");
+		$this->view->files_css=['register.css'];
+//		$data['js']=$this->insertJS("animationworkaround.js");
+		$this->view->files_js=['animationworkaround.js'];
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->register();
 		}
@@ -74,7 +76,8 @@ class Register extends GuestController
 		return true;
 	}
 	public function success(){
-		$data['css']=$this->insertCSS("login.css");
-		$this->view->render("register/success", $data);
+//		$data['css']=$this->insertCSS("login.css");
+		$this->view->files_css=['login.css'];
+		$this->view->render("register/success");
 	}
 }

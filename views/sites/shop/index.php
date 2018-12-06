@@ -1,4 +1,3 @@
-<?php echo $css;?>
 <div class="container">
 	<div class="grid">
 		<?php foreach ($prod as $product):?>

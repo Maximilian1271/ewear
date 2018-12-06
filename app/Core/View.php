@@ -24,18 +24,29 @@ class View
 		$markup = "";
 		if (count($this->files_css) > 0) {
 			foreach ($this->files_css as $file) {
-				$markup .= "<link rel='stylesheet' href='$file'>";
+				$markup .= "<link rel='stylesheet' href='".APP_URL."assets/css/$file'>";
 			}
 			return $markup;
 		} else {
 			return false;
 		}
 	}
+/*	private function loadCSS(){
+		$markup=;
+		if (count($this->files_css)>0){
+			foreach ($this->files_css as $file){
+				$markup.="<link rel=\"stylesheet\" href=\"".APP_URL."$file\">\n\r";
+			}
+			return $markup;
+		}
+		return false;
+	}*/
 	private function loadJS(){
 		$markup = "";
-		if (count($this->files_css) > 0) {
-			foreach ($this->files_css as $file) {
-				$markup .= "<script src='$file'></script>";
+		if (count($this->files_js) > 0) {
+			foreach ($this->files_js as $file) {
+//				$markup .= "<script src='".APP_URL."assets/js/$file'></script>";
+				$markup.="<script src='".APP_URL."assets/js/$file'></script>";
 			}
 			return $markup;
 		} else {

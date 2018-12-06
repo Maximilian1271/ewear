@@ -17,8 +17,9 @@ use app\Models\Product;
 class Admin extends AdminController
 {
 	public function index(){
-		$data['css']=$this->insertCSS("admin.css");
-		$this->view->render("admin/index", $data);
+		$this->view->files_css=["admin.css"];
+//		$data['css']=$this->insertCSS("admin.css");
+		$this->view->render("admin/index");
 	}
 	public function user(){
 		$user=new \App\Models\User();
@@ -40,7 +41,8 @@ class Admin extends AdminController
 			$markup.="</tr>";
 		}
 		$data['userList']=$markup;
-		$data['css']=$this->insertCSS("admin.css");
+//		$data['css']=$this->insertCSS("admin.css");
+		$this->view->files_css=["admin.css"];
 		$this->view->render("admin/user", $data);
 	}
 	public function useredit($id=null){
@@ -80,7 +82,8 @@ class Admin extends AdminController
 					header("Location:".APP_URL."admin/useredit");
 				}
 			}
-			$data['css']=$this->insertCSS("admin.css");
+			$this->view->files_css=['admin.css'];
+//			$data['css']=$this->insertCSS("admin.css");
 			$data['form']=$edit->output();
 			$data['user']=$user;
 			$this->view->render("admin/useredit", $data);
@@ -106,7 +109,8 @@ class Admin extends AdminController
 			$markup.="<td><a href='prodedit/{$product['id']}'>Edit</a></td>";
 			$markup.="</tr>";
 		}
-		$data['css']=$this->insertCSS("admin.css");
+		$this->view->files_css=["admin.css"];
+//		$data['css']=$this->insertCSS("admin.css");
 		$data['prod']=$markup;
 		$this->view->render("admin/product", $data);
 	}
@@ -129,7 +133,8 @@ class Admin extends AdminController
 		}
 		$data['prod']=$selected;
 		$data['form']=$form->output();
-		$data['css']=$this->insertCSS("admin.css");
+		$this->view->files_css=['admin.css'];
+//		$data['css']=$this->insertCSS("admin.css");
 		$this->view->render("admin/prodedit", $data);
 	}
 	public function productAdd(){
