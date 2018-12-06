@@ -8,14 +8,14 @@ function load_view($view, $data=array()){
 function load_global($global){
 	require __DIR__."/../views/globals/".$global.".php";
 }
-//function set_csrf(){
-//	$csrf=uniqid();
-//	Sessions::set("csrf", $csrf);
-//	return $csrf;
-//}
-//function check_csrf($csrf){
-//	return (Sessions::get("csrf")==$csrf)?true:false;
-//}
+/*function set_csrf(){
+	$csrf=uniqid();
+	Sessions::set("csrf", $csrf);
+	return $csrf;
+}
+function check_csrf($csrf){
+	return (Sessions::get("csrf")==$csrf)?true:false;
+}*/
 function previous($x){ //Funktion zum wiedergeben alter formular elemente (falls form invalid)
 	return(isset($_POST[$x]))?trim($_POST[$x]):"";
 }

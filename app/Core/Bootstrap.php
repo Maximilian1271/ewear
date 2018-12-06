@@ -27,6 +27,7 @@ class Bootstrap
 			}
 		} else {
 			$controller = new Error();
+			$controller->index();
 		}
 	}
 }

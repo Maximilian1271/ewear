@@ -6,6 +6,6 @@ use App\Core\Controller;
 class error extends Controller {
 	public function index()
 	{
-		echo "404 error";
+		echo "404<br>This is an Error";
 	}
 }
