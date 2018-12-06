@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="grid">
 		<?php foreach ($prod as $product):?>
-		<a href="<?php echo(APP_URL."shop/prod/{$product['title']}");?>">
+		<a href="<?php echo(APP_URL."shop/prod/".rawurlencode($product['title'])."");?>">
 			<div class="product">
 				<div class="title"><?php echo $product['title']?></div>
 				<div class="price"><?php echo($product['in_stock']?$product['base_price']."$":"Out of stock")?></div>
