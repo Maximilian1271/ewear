@@ -34,6 +34,11 @@ class Product extends Model{
 		$stmt=$this->db->query($sql)->fetch_all(MYSQLI_ASSOC);
 		return $stmt;
 	}
+	public function buildShop($query){
+		$sql="SELECT {$this->table_name}.*, productcategory.CategoryName FROM {$this->table_name} LEFT JOIN productcategory ON category_fs=productcategory.id WHERE title LIKE '%{$query}%'";
+		$stmt=$this->db->query($sql)->fetch_all(MYSQLI_ASSOC);
+		return $stmt;
+	}
 	public function updateProductById($id=null, $post=array()){
 		if (id!=null){
 			$stmt=$this->db->prepare("UPDATE {$this->table_name} SET title=?, product_desc=?, product_desc_long=?, in_stock=?, base_price=? WHERE id=$id");

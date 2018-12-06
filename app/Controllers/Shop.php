@@ -15,11 +15,20 @@ use app\Models\Product;
 class Shop extends Controller
 {
 	public function index(){
-		$product=new Product();
-		$data['prod']=$product->getAll();
+		if(isset($_POST['search'])){
+			$product=new Product();
+			$data['prod']=$product->buildShop($_POST['search']);
 //		$data['css']=$this->insertCSS("shop.css");
-		$this->view->files_css=['shop.css'];
-		$this->view->render("shop/index", $data);
+			$this->view->files_css=['shop.css'];
+			$this->view->render("shop/index", $data);
+		}
+		else{
+			$product=new Product();
+			$data['prod']=$product->getAll();
+//		$data['css']=$this->insertCSS("shop.css");
+			$this->view->files_css=['shop.css'];
+			$this->view->render("shop/index", $data);
+		}
 	}
 	public function prod($parm){
 		$product=new Product();

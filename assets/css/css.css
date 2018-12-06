@@ -32,7 +32,7 @@ a{
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
-.nav-main>.search>input{
+.nav-main>.search>form>input{
 	position: relative;
 	width: 541px;
 	height: 24px;
@@ -42,7 +42,7 @@ a{
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
-.nav-main>.search>label>.search{
+.nav-main>.search>form>label>.search{
 	position: absolute;
 	right: 0;
 	top: 50%;

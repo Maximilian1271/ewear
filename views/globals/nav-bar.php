@@ -1,8 +1,10 @@
 <aside>
 	<div class="nav-main">
 		<div class="search">
-			<input type="text" name="search" id="search">
-			<label for="search"><img class="search" src="<?php echo APP_URL."assets/images/baseline-search-24px.svg"?>" alt="search"></label>
+			<form action="<?php echo APP_URL."shop/"?>" method="post">
+				<input type="text" name="search" id="search">
+				<label for="search"><img class="search" src="<?php echo APP_URL."assets/images/baseline-search-24px.svg"?>" alt="search"></label>
+			</form>
 		</div>
 		<div class="options">
 			<?php if(\App\Libs\Sessions::get('login')==1): ?>
