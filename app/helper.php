@@ -19,3 +19,6 @@ function check_csrf($csrf){
 function previous($x){ //Funktion zum wiedergeben alter formular elemente (falls form invalid)
 	return(isset($_POST[$x]))?trim($_POST[$x]):"";
 }
+function countCart(){
+	print_r(json_decode(\App\Libs\Sessions::get('cart'), true));
+}

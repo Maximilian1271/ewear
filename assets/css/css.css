@@ -133,3 +133,29 @@ footer{
 	font-weight: 300;
 	font-size: 20px;
 }
+.cart{
+	position: relative;
+}
+.cart>div{
+	position: absolute;
+	top: -2px;
+	right: 10px;
+	color: black;
+	font-size: 13px;
+	z-index: 2;
+}
+.cart.fill>div:after{
+	content: '';
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	background-color: white;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+	z-index: -1;
+}
+.cart.fill>svg{
+	fill: #D19650;
+}

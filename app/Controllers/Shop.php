@@ -32,8 +32,10 @@ class Shop extends Controller
 	}
 	public function prod($parm){
 		$product=new Product();
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
-
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['size'])){
+			$id=$product->getProduct($parm);
+			$cart=array("id"=>$id['id'], "size"=>$_POST['size'], "num"=>$_POST['num']);
+			$_SESSION['cart'][]=$cart;
 		}
 		$data['prod']=$product->getProduct($parm);
 //		$data['css']=$this->insertCSS("product.css");

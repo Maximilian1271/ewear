@@ -57,12 +57,13 @@ input[type="radio"]:checked+label:after{
 	bottom: 0;
 	left: 0;
 	border-bottom: 1px solid black;
-}.text>.order{
+}
+.text>form>.order{
 	 display: flex;
 	 text-align: initial;
 	 flex-direction: column;
  }
- .order>.size{
+ form>.order>.size{
 	 display: flex;
 	 flex-basis: 100%;
 	 justify-content: space-between;
@@ -72,16 +73,16 @@ input[type="radio"]:checked+label:after{
 	 text-align: center;
 	 cursor: pointer;
  }
- .order>*{
+ form>.order>*{
 	 margin-top: 15px;
  }
- .order>input.submit{
+ form>.order>input.submit{
 	 height: 26px;
 	 background-color: #D19650;
 	 border: 1px solid black;
 	 cursor: pointer;
  }
-.order>input.submit:disabled{
+form>.order>input.submit:disabled{
 	height: 26px;
 	background-color: white;
 	border: 1px solid black;

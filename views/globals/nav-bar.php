@@ -13,7 +13,11 @@
 			<?php else: ?>
 				<a href="<?php echo APP_URL."login"?>">Log In</a> <i>|</i> <a href="<?php echo APP_URL."register"?>">Register</a>
 			<?php endif;?>
-			<a href="<?php echo APP_URL."cart"?>"><?php require "assets/images/baseline-shopping_cart-24px.svg";?></a>
+			<?php if(isset($_SESSION['cart'])&&$_SESSION['cart']>0):?>
+			<a class="cart fill" href="<?php echo APP_URL."cart"?>"><?php require "assets/images/baseline-shopping_cart-24px.svg";?><div><?php echo count($_SESSION['cart'])?></div></a>
+			<?php else:?>
+			<a class="cart" href="<?php echo APP_URL."cart"?>"><?php require "assets/images/baseline-shopping_cart-24px.svg";?><div>&nbsp;</div></a>
+			<?php endif;?>
 		</div>
 	</div>
 </aside>
