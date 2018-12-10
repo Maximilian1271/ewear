@@ -11,4 +11,3 @@
 		echo $form ?>
 	</div>
 </div>
-<?php echo $js?>

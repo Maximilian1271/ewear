@@ -5,7 +5,7 @@
 			<img class="prodimg" src="<?php if($prod['image']==""){echo APP_URL."assets/images/product/none.jpg";}else echo APP_URL."assets/images/product/".$prod['image']?>" alt="product image">
 		<div class="text">
 			<h2><?php echo $prod['title']?></h2>
-			<h3><?php echo $prod['base_price']?></h3>
+			<h3><?php echo $prod['base_price']?>&pound;</h3>
 			<hr>
 			<p><?php echo $prod['product_desc_long']?></p>
 			<hr>
@@ -39,7 +39,7 @@
 					</div>
 					<?php endif;?>
 					<div class="quantity">
-						<button onclick="document.querySelector('.amount').stepUp(1)">+</button><input name="num" number" min="1" max="10" value="1" class="amount" readonly><button onclick="document.querySelector('.amount').stepDown(1)">-</button>
+						<button type="button" onclick="document.querySelector('.amount').stepUp(1)">+</button><input name="num" type="number" min="1" max="10" value="1" class="amount" readonly><button type="button" onclick="document.querySelector('.amount').stepDown(1)">-</button>
 					</div>
 					<?php if ($prod['in_stock']==1):?>
 					<input type="submit" name="submit" id="submit" class="submit" value="Add to Cart">
@@ -50,7 +50,7 @@
 			</form>
 		</div>
 		<?php else:?>
-		There has been an error with your query. Please try something different
+		<?php header("Location:".APP_URL."error/query");?>
 		<?php endif;?>
 	</div>
 </div>

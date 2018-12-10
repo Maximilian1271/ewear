@@ -22,3 +22,7 @@ function previous($x){ //Funktion zum wiedergeben alter formular elemente (falls
 function countCart(){
 	print_r(json_decode(\App\Libs\Sessions::get('cart'), true));
 }
+//function error($code=array()){
+//	if (count($code)>0)extract($code);
+//	require "views/sites/error/error.php";
+//}

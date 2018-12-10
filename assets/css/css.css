@@ -159,3 +159,30 @@ footer{
 .cart.fill>svg{
 	fill: #D19650;
 }
+.errorcontainer{
+	position: relative;
+}
+.errorcontainer>svg.err{
+	width: 700px;
+	display: block;
+	margin: 0 auto;
+}
+.errorcontainer>h2{
+	max-width: 320px;
+	position: absolute;
+	top: 18%;
+	color: white;
+	font-weight: 300;
+	user-select: none;
+	text-align: center;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.errorcontainer>h2>i{
+	text-shadow: 1px 1px 10px #fff;
+	color: #bbb;
+}
+.errorcontainer>h2>a{
+	display: block;
+	margin-top: 60px;
+}

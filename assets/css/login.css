@@ -57,7 +57,7 @@
 	transition: transform .3s, color .3s;
 	/*transform-origin: bottom left;*/
 }
-.field>button{
+button{
 	width: 157px;
 	height: 25px;
 	background: transparent;

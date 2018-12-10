@@ -14,10 +14,23 @@ use App\Libs\Sessions;
 
 class Cart extends UserController {
 	public function index(){
-//		$data['css']=$this->insertCSS("cart.css");
-		$this->view->files_css=["cart.css"];
+		if (isset($_SESSION['cart'])){
+			$cart=new \app\Models\Cart();
+			$cart->sessionToCart($_SESSION);
+		}
+		if (isset($_SESSION['cart_count'])&&$_SESSION['cart_count']>0){
+			$cart=new \app\Models\Cart();
+			$data['cart']=$cart->resolveCart();
+		}
+		$this->view->files_css=["cart.css", "login.css"];
+		if (isset($data)){
+			$this->view->render("cart/index", $data);
+		}else $this->view->render("cart/index");
+
+	}
+	public function clear(){
 		$cart=new \app\Models\Cart();
-		$data['cart']=$cart->getCartById(Sessions::get('id'));
-		$this->view->render("cart/index", $data);
+		$cart->clearCart();
+		header("Location:". APP_URL."home");
 	}
 }

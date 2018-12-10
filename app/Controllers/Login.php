@@ -46,10 +46,14 @@ class Login extends GuestController {
 			if ($account["uname"] == $_POST['uname'] && sha1($_POST['pass'] . $pw_hash[1]) == $pw_hash[0]) {
 				if($account['is_active']==1){
 					if ($account['locked']!=1){
+						$cart=new \app\Models\Cart();
+						Sessions::del("cart");
+						Sessions::del("cart_count");
 						Sessions::set("uname", $account['uname']);
 						Sessions::set("id", $account['id']);
 						Sessions::set("login", true);
 						Sessions::set("user_group", $account['roles_fs']);
+						Sessions::set("cart_count", $cart->getCartCount());
 						header("Location:".APP_URL."home");
 					}else return $val->getErrors(9);
 				} else return $val->getErrors(5);

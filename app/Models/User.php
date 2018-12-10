@@ -27,7 +27,7 @@ class User extends Model {
 		$stmt->bind_param("ssssisiii",$uname, $email, $pw, $data, $user_group, $hash, $is_active, $created_at, $newsletter);
 		$stmt->execute();
 		$cart=new Cart();
-		$cart->createCart($uname);
+		$cart->createCart($stmt->insert_id);
 		return $hash;
 	}
 	public function getUserByUname($username){

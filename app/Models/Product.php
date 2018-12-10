@@ -24,10 +24,8 @@ class Product extends Model{
 		}
 		else return false;
 	}
-	public function getProductById($id=null){
-		if ($id!=null){
-			return $this->db->query("SELECT * FROM {$this->table_name} WHERE id=$id LIMIT 1")->fetch_assoc();
-		}
+	public function getProductById($id){
+		return $this->db->query("SELECT * FROM {$this->table_name} WHERE id=$id LIMIT 1")->fetch_assoc();
 	}
 	public function getAll(){
 		$sql="SELECT {$this->table_name}.*, productcategory.CategoryName FROM {$this->table_name} LEFT JOIN productcategory ON category_fs=productcategory.id";

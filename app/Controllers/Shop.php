@@ -34,8 +34,18 @@ class Shop extends Controller
 		$product=new Product();
 		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['size'])){
 			$id=$product->getProduct($parm);
-			$cart=array("id"=>$id['id'], "size"=>$_POST['size'], "num"=>$_POST['num']);
-			$_SESSION['cart'][]=$cart;
+			if(!isset($_POST['colour'])){
+				$_POST['colour']="null";
+			}
+			$cart=array("id"=>$id['id'],"title"=> $id['title'], "size"=>$_POST['size'], "num"=>$_POST['num'], "colour"=>$_POST['colour']);
+			$_SESSION['cart'][]=json_encode($cart);
+			if(isset($_SESSION['cart_count'])){
+				$_SESSION['cart_count']++;
+			}else{
+				$_SESSION['cart_count']=0;
+				$_SESSION['cart_count']++;
+			}
+			header("Location:".APP_URL."shop");
 		}
 		$data['prod']=$product->getProduct($parm);
 //		$data['css']=$this->insertCSS("product.css");

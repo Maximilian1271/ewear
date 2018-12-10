@@ -17,12 +17,12 @@ class AdminController extends Controller {
 	}
 	private function checkGroup(){
 		if (Sessions::get('login')!=1){
-			echo "must be logged in to view";
-			exit();
+			header("Location:".APP_URL."error/login");
+//			error(["You don't seem to be logged in. Please log in to do that"]);
 		}
 		if(Sessions::get('user_group')<2){
-			echo "must be admin to view";
-			exit();
+			header("Location:".APP_URL."error/perm");
+//			error(["You seem to have insufficient permissions. Sorry about that :/"]);
 		}
 	}
 }

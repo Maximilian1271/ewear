@@ -12,6 +12,6 @@
 		<?php endforeach;?>
 	</div>
 	<?php else:?>
-	<div>Your Query returned no results :c</div>
+	<?php header("Location:".APP_URL."error/empty");?>
 	<?php endif;?>
 </div>

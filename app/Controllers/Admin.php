@@ -115,7 +115,6 @@ class Admin extends AdminController
 		$this->view->render("admin/product", $data);
 	}
 	public function prodedit($id){
-
 		$product=new Product();
 		$selected=$product->getProductById($id);
 		$form=new Formbuilder("Prodedit", "POST", "", true);
