@@ -3,7 +3,6 @@ namespace App\Libs;
 class Formbuilder{
 	private $markup="";
 	public function __construct($name ,$method="POST", $action="", $enctype=false){
-//		$this->markup="<script src='assets/js/animationworkaround.js'></script>\n";
 		$this->markup="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";

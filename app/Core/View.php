@@ -31,16 +31,6 @@ class View
 			return false;
 		}
 	}
-/*	private function loadCSS(){
-		$markup=;
-		if (count($this->files_css)>0){
-			foreach ($this->files_css as $file){
-				$markup.="<link rel=\"stylesheet\" href=\"".APP_URL."$file\">\n\r";
-			}
-			return $markup;
-		}
-		return false;
-	}*/
 	private function loadJS(){
 		$markup = "";
 		if (count($this->files_js) > 0) {

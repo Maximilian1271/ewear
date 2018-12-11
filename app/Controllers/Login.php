@@ -19,8 +19,6 @@ class Login extends GuestController {
 	public function index(){
 		$this->view->files_css=["login.css"];
 		$this->view->files_js=["animationworkaround.js"];
-//		$data['css']=$this->insertCSS("login.css");
-//		$data['js']=$this->insertJS("animationworkaround.js");
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$data['errors'] = $this->login();
 		}

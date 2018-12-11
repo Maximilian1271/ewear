@@ -18,7 +18,6 @@ class Admin extends AdminController
 {
 	public function index(){
 		$this->view->files_css=["admin.css"];
-//		$data['css']=$this->insertCSS("admin.css");
 		$this->view->render("admin/index");
 	}
 	public function user(){
@@ -41,7 +40,6 @@ class Admin extends AdminController
 			$markup.="</tr>";
 		}
 		$data['userList']=$markup;
-//		$data['css']=$this->insertCSS("admin.css");
 		$this->view->files_css=["admin.css"];
 		$this->view->render("admin/user", $data);
 	}
@@ -83,7 +81,6 @@ class Admin extends AdminController
 				}
 			}
 			$this->view->files_css=['admin.css'];
-//			$data['css']=$this->insertCSS("admin.css");
 			$data['form']=$edit->output();
 			$data['user']=$user;
 			$this->view->render("admin/useredit", $data);
@@ -110,7 +107,6 @@ class Admin extends AdminController
 			$markup.="</tr>";
 		}
 		$this->view->files_css=["admin.css"];
-//		$data['css']=$this->insertCSS("admin.css");
 		$data['prod']=$markup;
 		$this->view->render("admin/product", $data);
 	}
@@ -133,7 +129,6 @@ class Admin extends AdminController
 		$data['prod']=$selected;
 		$data['form']=$form->output();
 		$this->view->files_css=['admin.css'];
-//		$data['css']=$this->insertCSS("admin.css");
 		$this->view->render("admin/prodedit", $data);
 	}
 	public function productAdd(){

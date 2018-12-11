@@ -17,8 +17,6 @@ use App\Libs\Validator;
 class User extends UserController
 {
 	public function index(){
-//		$data['css']=$this->insertCSS("login.css");
-//		$data['css2']=$this->insertCSS("user.css");
 		$this->view->files_css=['login.css', 'user.css'];
 		$user=new \App\Models\User();
 		$data['user']=$user->getUserByUname(Sessions::get("uname"));
@@ -36,10 +34,7 @@ class User extends UserController
 			->addButton("submit", "Update")
 			->addButton("remove", "Remove Account", ["class"=>"remove", "onclick"=>"var x=confirm('Are you sure you want to delete your Account?'); if(x==false){return false}"]);
 		$data['form']=$form->output();
-//		$data['css']=$this->insertCSS("login.css");
-//		$data['css2']=$this->insertCSS("user.css");
 		$this->view->files_css=['login.css', 'user.css'];
-//		$data['js']=$this->insertJS("animationworkaround.js");
 		$this->view->files_js=['animationworkaround.js'];
 		$user=new \App\Models\User();
 		$userid=$user->getUserByUname(Sessions::get("uname"));

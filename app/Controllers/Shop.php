@@ -18,14 +18,12 @@ class Shop extends Controller
 		if(isset($_POST['search'])){
 			$product=new Product();
 			$data['prod']=$product->buildShop($_POST['search']);
-//		$data['css']=$this->insertCSS("shop.css");
 			$this->view->files_css=['shop.css'];
 			$this->view->render("shop/index", $data);
 		}
 		else{
 			$product=new Product();
 			$data['prod']=$product->getAll();
-//		$data['css']=$this->insertCSS("shop.css");
 			$this->view->files_css=['shop.css'];
 			$this->view->render("shop/index", $data);
 		}
@@ -48,7 +46,6 @@ class Shop extends Controller
 			header("Location:".APP_URL."shop");
 		}
 		$data['prod']=$product->getProduct($parm);
-//		$data['css']=$this->insertCSS("product.css");
 		$this->view->files_css=['product.css'];
 		$this->view->render("shop/prod", $data);
 	}

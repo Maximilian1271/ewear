@@ -24,9 +24,6 @@ class Cart extends Model{
 	}
 	public function sessionToCart($session=array()){
 		$data=implode("::", $session['cart']);
-//		if ($id!=null){
-//			$this->db->query("UPDATE {$this->table_name} SET data='$data' WHERE user_fs=$id");
-//		}
 		if($_SESSION['cart_count']>0){
 			$this->db->query("UPDATE {$this->table_name} SET data=CONCAT(data,'::$data') WHERE user_fs={$_SESSION['id']}");
 		}
@@ -55,6 +52,5 @@ class Cart extends Model{
 	public function clearCart(){
 		$this->db->query("UPDATE {$this->table_name} SET data='' WHERE user_fs={$_SESSION['id']}");
 		unset($_SESSION['cart_count']);
-//		$_SESSION['cart_count']=0;
 	}
 }
