@@ -31,12 +31,12 @@ $json=json_decode($user['data'], true); ?>
 		</div>
 		<div class="field textfield">
 			<label class="label activejs" for="address">Address</label>
-			<input type="text" name="address" value="<?php echo $json['address'] ?>" required><br>
+			<input type="text" name="address" value="<?php echo $json['address'] ?>" required <?php if($json['address']==""):echo ("placeholder=\"Please provide a Valid address here or in your Profile\""); endif; ?>><br>
 			<div class="underline"></div>
 		</div>
 		<div class="field textfield">
 			<label class="label activejs" for="zip">ZIP</label>
-			<input type="text" name="zip" value="<?php echo $json['zip'] ?>" required><br>
+			<input type="text" name="zip" value="<?php echo $json['zip'] ?>" required <?php if($json['zip']==""):echo ("placeholder=\"Please provide a Valid address here or in your Profile\""); endif; ?>><br>
 			<div class="underline"></div>
 		</div>
 		<h4>Payment Options:</h4>

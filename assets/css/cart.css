@@ -1,3 +1,16 @@
+
+html{
+	position: relative;
+	min-height: 100%;
+}
+footer{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
 .additional{
 	margin: 20px 0 0 50px;
 }
@@ -74,4 +87,11 @@
 }
 .order{
 	color: #58a958;
+}
+.order:disabled{
+	color: grey;
+}
+.res>p{
+	color: #D19650;
+	font-weight: 600;
 }

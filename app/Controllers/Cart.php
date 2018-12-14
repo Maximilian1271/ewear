@@ -15,9 +15,9 @@ use app\Models\Order;
 
 class Cart extends UserController {
 	public function index(){
-		$this->view->files_js=(["animationworkaround.js"]);
+		$this->view->files_js=(["animationworkaround.js", "cartcheck.js"]);
 		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&& isset($_POST['place'])){
-			$this->placeOrder();
+			header("Location: cart/pay");
 		}
 		if (isset($_SESSION['cart'])){
 			$cart=new \app\Models\Cart();
@@ -38,7 +38,7 @@ class Cart extends UserController {
 		$cart->clearCart();
 		header("Location:". APP_URL."home");
 	}
-	public function placeOrder(){
+	public function pay(){
 		$this->view->render("cart/pay");
 	}
 }
