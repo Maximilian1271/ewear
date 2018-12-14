@@ -14,7 +14,8 @@ use App\Libs\Sessions;
 
 class Cart extends Model{
 	protected $table_name="cart";
-	public function getCartById($id){
+	public function getCart(){
+		$id=Sessions::get('id');
 		return $this->db->query("SELECT * FROM {$this->table_name} WHERE user_fs=$id")->fetch_assoc();
 	}
 	public function createCart($id=null){
@@ -38,13 +39,15 @@ class Cart extends Model{
 		return count($cart);
 	}
 	public function resolveCart(){
-		$cart=$this->getCartById(Sessions::get('id'));
+		$cart=$this->getCart();
 		$cart=$cart['data'];
 		$cart=substr($cart, 2);
 		$cart=explode("::", $cart);
 		$res=array();
 		foreach ($cart as $item) {
 			$entry=json_decode($item, true);
+			$prod=new Product();
+			$entry['productinfo']=$prod->getProductById($entry['id']);
 			$res[]=$entry;
 		}
 		return $res;

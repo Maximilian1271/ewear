@@ -1,0 +1,1 @@
+<h2>Your Order has been submitted successfully!</h2>

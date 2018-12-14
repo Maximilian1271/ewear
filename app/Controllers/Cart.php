@@ -11,9 +11,14 @@ namespace app\Controllers;
 
 use App\Core\UserController;
 use App\Libs\Sessions;
+use app\Models\Order;
 
 class Cart extends UserController {
 	public function index(){
+		$this->view->files_js=(["animationworkaround.js"]);
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&& isset($_POST['place'])){
+			$this->placeOrder();
+		}
 		if (isset($_SESSION['cart'])){
 			$cart=new \app\Models\Cart();
 			$cart->sessionToCart($_SESSION);
@@ -32,5 +37,8 @@ class Cart extends UserController {
 		$cart=new \app\Models\Cart();
 		$cart->clearCart();
 		header("Location:". APP_URL."home");
+	}
+	public function placeOrder(){
+		$this->view->render("cart/pay");
 	}
 }

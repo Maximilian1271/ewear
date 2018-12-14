@@ -57,7 +57,7 @@
 	transition: transform .3s, color .3s;
 	/*transform-origin: bottom left;*/
 }
-button{
+button,input[type="button"], input[type="submit"] {
 	width: 157px;
 	height: 25px;
 	background: transparent;

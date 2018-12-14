@@ -1,4 +1,4 @@
-<?php print_r($_SESSION) ?>
+<?php //print_r($_SESSION) ?>
 <aside>
 	<div class="nav-main">
 		<div class="search">

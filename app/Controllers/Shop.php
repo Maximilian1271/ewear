@@ -35,7 +35,7 @@ class Shop extends Controller
 			if(!isset($_POST['colour'])){
 				$_POST['colour']="null";
 			}
-			$cart=array("id"=>$id['id'],"title"=> $id['title'], "size"=>$_POST['size'], "num"=>$_POST['num'], "colour"=>$_POST['colour']);
+			$cart=array("id"=>$id['id'], "size"=>$_POST['size'], "num"=>$_POST['num'], "colour"=>$_POST['colour']);
 			$_SESSION['cart'][]=json_encode($cart);
 			if(isset($_SESSION['cart_count'])){
 				$_SESSION['cart_count']++;

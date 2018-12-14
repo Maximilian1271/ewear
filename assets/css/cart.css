@@ -7,3 +7,71 @@
 .order{
 	float: right;
 }
+.btns>form{
+	display: contents;
+}
+.login>h2{
+	display: inline;
+}
+.login>p{
+	display: inline;
+	float: right;
+	margin: 0 50px;
+	font-size: 1.5em;
+	color: #D19650;
+	font-weight: 100;
+}
+.res{
+	position: fixed;
+	top: 260px;
+	width: 420px;
+	background: #F0F0F0;
+	border-radius: 10px;
+	padding: 30px 30px;
+	right: 90px;
+}
+.res>h2{
+	display: inline;
+}
+.res>p{
+	display: inline;
+	float: right;
+}
+.option>input[type="radio"]{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.pay{
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+.res>.option>label{
+	cursor: pointer;
+	display: inline;
+}
+.option>input:checked+label>img{
+	transition: box-shadow .4s;
+	box-shadow: 0px 0px 15px 3px #D19650;
+}
+.field>label{
+	transform-origin: left;
+}
+.option>label>img{
+	display: block;
+	width: 64px;
+}
+.res>input{
+	width: 50px;
+}
+.option{
+	display: inline;
+}
+.remove{
+	color: red;
+}
+.order{
+	color: #58a958;
+}
