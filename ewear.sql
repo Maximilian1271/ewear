@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2018 at 10:37 PM
+-- Generation Time: Dec 14, 2018 at 04:17 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ewear`
 --
+CREATE DATABASE IF NOT EXISTS `ewear` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ewear`;
 
 -- --------------------------------------------------------
 
@@ -39,8 +41,21 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_fs`, `data`) VALUES
-(1, 15, ''),
-(2, 16, '');
+(1, 3, ''),
+(4, 17, '::{\"id\":\"3\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"null\"}::{\"id\":\"2\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"black\"}::{\"id\":\"1\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"black\"}::{\"id\":\"4\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"black\"}::{\"id\":\"5\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"red\"}::{\"id\":\"6\",\"size\":\"M\",\"num\":\"1\",\"colour\":\"null\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `cart_data` text NOT NULL,
+  `user_fs` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -63,7 +78,8 @@ INSERT INTO `productcategory` (`id`, `CategoryName`, `CategoryShortDesc`, `Categ
 (1, 'unset', 'this means nobody has set a category yet', ''),
 (2, 'Hoodie', 'Hoodies', ''),
 (3, 'T-Shirt', 'T-Shirts', ''),
-(4, 'Beany', 'Beanies', '');
+(4, 'Beany', 'Beanies', ''),
+(5, 'Casual Wear', 'Wear for the extremely Casual', '');
 
 -- --------------------------------------------------------
 
@@ -89,15 +105,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `product_desc`, `product_desc_long`, `base_price`, `image`, `created_at`, `in_stock`, `data`, `category_fs`) VALUES
-(1, 'Block shop zip up hoodie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 50, 'CLK-ZIP-BLOCK-HOODIE-ATHR-XXL-DOWN-FRONT_600x.jpg', 1543524848, 0, '{\"colour\":[\"black\",\"green\"]}', 2),
-(2, 'Deep Space Hoodie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 80, 'CLK-CORP-HOODIE-BLCK-HIM-UP-LEFT15_600x.jpg', 1543524848, 1, '', 2),
+(1, 'Block shop zip up hoodie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', 50, 'CLK-ZIP-BLOCK-HOODIE-ATHR-XXL-DOWN-FRONT_600x.jpg', 1543524848, 1, '{\"colour\":[\"black\",\"green\"]}', 2),
+(2, 'Deep Space Hoodie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 80, 'CLK-CORP-HOODIE-BLCK-HIM-UP-LEFT15_600x.jpg', 1543524848, 1, '{\"colour\":[\"black\",\"green\", \"magenta\", \"khaki\"]}', 2),
 (3, 'Spy Hoodie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 80, 'CLK-TEAM-HOODIE-BLCK-HER-DOWN-LEFT15_600x.jpg', 1543524848, 1, '', 2),
-(4, 'Cloud Tech Quarter Zip Long Sleeve', 'These Pants are sleek', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 65, 'CLK-CONCRETE-QUARTER-ZIP-CHHR-HER-FRONT_600x.jpg', 1543524848, 1, '', 3),
-(5, 'Black Pool Quarter Zip Long Sleeve', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 65, 'CLK-STEALTH-QUARTER-ZIP-BLCK-HIM-RIGHT45-MID_600x.jpg', 1543524848, 1, '', 3),
+(4, 'Cloud Tech Quarter Zip Long Sleeve', 'These Pants are sleek', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 65, 'CLK-CONCRETE-QUARTER-ZIP-CHHR-HER-FRONT_600x.jpg', 1543524848, 1, '{\"colour\":[\"black\",\"silver\", \"blue\"]}', 3),
+(5, 'Black Pool Quarter Zip Long Sleeve', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 65, 'CLK-STEALTH-QUARTER-ZIP-BLCK-HIM-RIGHT45-MID_600x.jpg', 1543524848, 1, '{\"colour\":[\"red\"]}', 3),
 (6, 'Zip Line Tee', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 35, 'CLK-LINE-TEE-BLCK-HIM-FRONT_600x.jpg', 1543524848, 1, '', 3),
 (7, 'Classic Stealth Tee', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 35, 'CLK-BASIC-TEE-BLCK-HIM-LEFT30_600x.jpg', 1543524848, 1, '', 3),
 (8, 'Use Your Illusion Tee', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 35, 'CLK-REFLECT-TEE-ATHR-HER-FRONT_600x.jpg', 1543524848, 1, '', 3),
-(9, 'Cloak Cloud Beanie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 20, 'CLK-BEANIE-FRONT_600x.jpg', 1543524848, 0, '', 4);
+(9, 'Cloak Cloud Beanie', 'These shoes are very amazing', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Test2', 20, 'CLK-BEANIE-FRONT_600x.jpg', 1543524848, 0, '', 4),
+(10, 'Orange Checkered Shirt', 'This shirt is very Orange', 'This shirt is quite Orange indeed! You\'ll find that with this shirt, Luck will always follow you the most. Except when it does not. Then that is your fault :c', 60, 'blue-blue-skies-blue-sky-1195548.jpg', 1544752770, 1, '', 5),
+(11, 'Checkered Tee No.2', 'This Shirt is checkered', 'This Shirt does some extraordinary things. It keeps you warm during the cold, but keeps you cold during the warm. This seems like utter magic to me. You should definitely buy!', 20, 'brick-wall-casual-cool-769733.jpg', 1544752770, 1, '', 5),
+(12, 'Pink Casual Linen', 'This Product is made of linen', 'With this product you don\'t only look great, but you will instantly develop some rad abs! Trust me, the model we tried it one was like 900 lbs before! This shirt truly is a great buy!', 50, 'abs-adult-casual-936011.jpg', 1544752770, 0, '', 5);
 
 -- --------------------------------------------------------
 
@@ -144,13 +163,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `uname`, `email`, `data`, `roles_fs`, `hash`, `is_active`, `created_at`, `password`, `newsletter`, `locked`) VALUES
-(3, 'Admin', 'maximilian.schaumann@gmail.com', '{\"name\":\"Maximilian Michael\",\"surname\":\"Schaumann\",\"address\":\"Vorgartenstrasse 122/4/455\",\"zip\":\"1020 Wien\"}', 2, '5c0049fb569bc', 1, 1543522811, '70bedd697110b90ba9c7a68b0e8b0b3a90a4f785:4209', 0, 0),
-(7, 'Troublemaker', 'moritz.boehmer@narutofan.de', '{\"name\":\"Moritz\",\"surname\":\"Boehmer\",\"address\":\"Baumgasse\",\"zip\":\"1010 Wien\"}', 1, '5c028b4661ac4', 1, 1543670598, '6ef7621b9042c8946d7f6d335e88f4ebe1ddf20c:4809', 0, 0),
-(8, 'JL', 'julian.lorenz@lorenz.at', '{\"name\":\"Julian\",\"surname\":\"Lorenz\",\"address\":\"VgtStreet\",\"zip\":\"1210 Wien\"}', 1, '5c028b4661ac4', 1, 1543670598, '6ef7621b9042c8946d7f6d335e88f4ebe1ddf20c:4809', 0, 0),
-(9, 'JL', 'julian.lorenz@lorenz.at', '{\"name\":\"Julian\",\"surname\":\"Lorenz\",\"address\":\"VgtStreet\",\"zip\":\"1210 Wien\"}', 1, '5c028b4661ac4', 1, 1543670598, '6ef7621b9042c8946d7f6d335e88f4ebe1ddf20c:4809', 0, 0),
-(10, 'JL', 'julian.lorenz@lorenz.at', '{\"name\":\"Julian\",\"surname\":\"Lorenz\",\"address\":\"VgtStreet\",\"zip\":\"1210 Wien\"}', 1, '5c028b4661ac4', 1, 1543670598, '6ef7621b9042c8946d7f6d335e88f4ebe1ddf20c:4809', 0, 0),
-(11, 'FSchaumann', 'f.schaumann@gmail.com', '{\"name\":\"Franziska\",\"surname\":\"Schaumann\",\"address\":\"Vgartenstrasse\",\"zip\":\"1020 WIen\"}', 1, '5c03c38b3e736', 1, 1543750539, 'd09c27b75a30b956ec9e6aa18b419282a706c64c:1355', 0, 0),
-(15, 'MarvinB', 'marvin.b@gmail.com', '{\"name\":\"Marvin\",\"surname\":\"Buhle\",\"address\":\"\",\"zip\":\"\"}', 1, '5c045d38e820f', 1, 1543789880, '2f631bea67af591e57b785bcdf4d33b9365bc9c6:9323', 0, 0);
+(3, 'admin', 'maximilian.schaumann@gmail.com', '{\"name\":\"Maximilian Michael\",\"surname\":\"Schaumann\",\"address\":\"Vorgartenstrasse 122/4/455\",\"zip\":\"1020 Wien\"}', 2, '5c0049fb569bc', 1, 1543522811, '70bedd697110b90ba9c7a68b0e8b0b3a90a4f785:4209', 0, 0),
+(17, 'fschaumann', 'fschaumann@gmail.com', '{\"name\":\"Franziska\",\"surname\":\"Schaumann\",\"address\":\"\",\"zip\":\"\"}', 1, '5c0da13881f9c', 1, 1544397112, '840c031a7145834e48ad32963f344111c566aaaa:5257', 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -160,6 +174,12 @@ INSERT INTO `users` (`id`, `uname`, `email`, `data`, `roles_fs`, `hash`, `is_act
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -194,19 +214,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `productcategory`
 --
 ALTER TABLE `productcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -218,7 +244,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

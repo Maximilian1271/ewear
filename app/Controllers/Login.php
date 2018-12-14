@@ -25,7 +25,7 @@ class Login extends GuestController {
 		$form=new Formbuilder("login");
 		$form->addInput("text", "uname", "Username", ['class'=>'jsfocusactive'])
 		->addInput("password", "pass", "Password", ['class'=>'jsfocusactive'])
-		->addButton("Submit", "Log In");
+		->addButton("Submit", "Sign In");
 		$data['form']=$form->output();
 		$this->view->render("login/index", $data);
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
