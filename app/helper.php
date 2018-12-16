@@ -3,10 +3,12 @@
 
 function load_view($view, $data=array()){
 	if(count($data)>0)extract($data);
-	require __DIR__."/../views/sites/".$view.".php";
+	if(file_exists(__DIR__."/../views/sites/".$view.".php")) require __DIR__."/../views/sites/".$view.".php";
+	if(file_exists(__DIR__."/../views/sites/".$view.".html")) require __DIR__."/../views/sites/".$view.".html";
 }
 function load_global($global){
-	require __DIR__."/../views/globals/".$global.".php";
+	if(file_exists(__DIR__."/../views/globals/".$global.".php")) require __DIR__."/../views/globals/".$global.".php";
+	if(file_exists(__DIR__."/../views/globals/".$global.".html")) require __DIR__."/../views/globals/".$global.".html";
 }
 /*function set_csrf(){
 	$csrf=uniqid();
