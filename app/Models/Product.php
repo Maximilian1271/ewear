@@ -13,7 +13,7 @@ use App\Core\Model;
 
 class Product extends Model{
 	protected $table_name = "products";
-	protected $targetFolder= "assets/images/product";
+	protected $targetFolder= "assets/images/product/";
 	public function setProduct($data){
 
 	}
