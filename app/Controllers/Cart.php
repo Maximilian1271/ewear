@@ -38,7 +38,20 @@ class Cart extends UserController {
 		$cart->clearCart();
 		header("Location:". APP_URL."home");
 	}
-	public function pay(){
-		$this->view->render("cart/pay");
+	public function checkout(){
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&& isset($_POST['place'])) {
+			$cart=new \app\Models\Cart();
+			$shipping=array(
+				"Name"=>$_POST['name'],
+				"Address"=>$_POST['address'],
+				"Postal Code (ZIP)"=>$_POST['zip'],
+				"Payment Method"=>$_POST['pay']
+			);
+			$data['shipping']=$shipping;
+			$data['cart']=$cart->resolveCart();
+			$this->view->files_css=["login.css", "user.css", "cart.css"];
+			$this->view->render("cart/checkout", $data);
+		}
+		else echo "You may not order an empty cart";
 	}
 }

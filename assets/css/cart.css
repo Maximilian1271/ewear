@@ -17,6 +17,9 @@ footer{
 .container>.login{
 	margin-bottom: 70px;
 }
+.container>.login:last-child{
+	margin-bottom: calc(70px*3.5);
+}
 .order{
 	float: right;
 }
@@ -36,7 +39,7 @@ footer{
 }
 .res{
 	position: fixed;
-	top: 260px;
+	top: 90px;
 	width: 420px;
 	background: #F0F0F0;
 	border-radius: 10px;
@@ -94,4 +97,8 @@ footer{
 .res>p{
 	color: #D19650;
 	font-weight: 600;
+}
+i.req{
+	color: red;
+	font-size: 17px;
 }
