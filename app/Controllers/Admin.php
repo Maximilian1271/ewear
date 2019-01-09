@@ -115,10 +115,10 @@ class Admin extends AdminController
 		$selected=$product->getProductById($id);
 		$form=new Formbuilder("Prodedit", "POST", "", true);
 		$form->addInput("text", "Title", "Title", ["value"=>$selected['title']])
-		->addInput("text", "DescShort", "Short Text", ["value"=>$selected['product_desc']])
+		->addInput("text", "DescShort", "Short Description", ["value"=>$selected['product_desc']])
 		->addInput("number", "InStock", "In Stock", ["value"=>$selected['in_stock'], "min"=>"0", "max"=>"1"])
 		->addInput("number", "basePrice", "Base Price", ["value"=>$selected['base_price'], "min"=>"0"])
-		->addTextarea("desLong", "Long Text", $selected['product_desc_long'])
+		->addTextarea("desLong", "Long Description", $selected['product_desc_long'])
 		->addButton("update", "update");
 		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
 			if($product->updateProductById($id, $_POST)){
@@ -132,6 +132,23 @@ class Admin extends AdminController
 		$this->view->render("admin/prodedit", $data);
 	}
 	public function productAdd(){
-		$this->view->render("admin/productadd");
+		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
+			$product=new Product();
+			$product->addProduct($_POST, $_FILES);
+//			print_r($_FILES);
+//			print_r($_POST);
+		}
+		$form=new Formbuilder("Prodedit", "POST", "", true);
+		$form->addInput("text", "title", "Title")
+			->addInput("text", "desc", "Short Description")
+			->addInput("number", "stock", "In Stock", ["min"=>0, "max"=>1, "value"=>1])
+			->addInput("number", "baseprice", "Base Price", ["min"=>0])
+			->addTextarea("longDesc", "Long Description")
+			->addInput("text", "colour", "Colour Variants")
+			->addInput("file", "img", "Product Image", ["accept"=>"image/*"])
+			->addButton("submit", "submit");
+		$data['form']=$form->output();
+		$this->view->files_css=['admin.css'];
+		$this->view->render("admin/productadd", $data);
 	}
 }

@@ -6,7 +6,7 @@ class Formbuilder{
 		$this->markup="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";
-		$this->markup.=($enctype)?"enctype=\"multipart/form-dat\">":">";
+		$this->markup.=($enctype)?"enctype=\"multipart/form-data\">":">";
 //		$csrf= set_csrf();
 //		$this->markup.="<input type='hidden' value='$csrf' name='csrf'>";
 		$this->markup.="<div class='row'>\n";

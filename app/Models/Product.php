@@ -13,6 +13,7 @@ use App\Core\Model;
 
 class Product extends Model{
 	protected $table_name = "products";
+	protected $targetFolder= "assets/images/product";
 	public function setProduct($data){
 
 	}
@@ -42,6 +43,20 @@ class Product extends Model{
 			$stmt=$this->db->prepare("UPDATE {$this->table_name} SET title=?, product_desc=?, product_desc_long=?, in_stock=?, base_price=? WHERE id=$id");
 			$stmt->bind_param("sssii", $post['Title'], $post['DescShort'], $post['desLong'], $post['InStock'], $post['basePrice']);
 			return($stmt->execute()?true:false);
+		}
+	}
+	public function addProduct($data=array(), $files=array()){
+		if($data>0){
+			if($files>0){
+				$cat=1;
+				$colour=json_encode(["colour"=>"red"]);
+				$img=$this->targetFolder.$files['img']['name'];
+				move_uploaded_file($files['img']['tmp_name'], $img);
+				$stmt=$this->db->prepare("INSERT INTO $this->table_name ('title', 'product_desc', 'product_desc_long', 'base_price', 'image', 'created_at', 'in_stock', 'data', 'category_fs') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				$stmt->bind_param("sssisiisi", $data['title'], $data['desc'], $data['longDesc'], $data['baseprice'], $files['img']['name'], $time, $data['stock'], $colour, $cat);
+				$stmt->execute();
+			}
+
 		}
 	}
 }
