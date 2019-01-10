@@ -45,16 +45,21 @@ class Product extends Model{
 			return($stmt->execute()?true:false);
 		}
 	}
-	public function addProduct($data=array(), $files=array()){
-		if($data>0){
+	public function addProduct($post=array(), $files=array()){
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		if($post>0){
 			if($files>0){
 				$cat=1;
-				$colour=json_encode(["colour"=>"red"]);
+				$colour=json_encode(array("colour"=>explode(",", trim($post['colour']))));
+				$time=time();
 				$img=$this->targetFolder.$files['img']['name'];
 				move_uploaded_file($files['img']['tmp_name'], $img);
-				$stmt=$this->db->prepare("INSERT INTO $this->table_name ('title', 'product_desc', 'product_desc_long', 'base_price', 'image', 'created_at', 'in_stock', 'data', 'category_fs') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-				$stmt->bind_param("sssisiisi", $data['title'], $data['desc'], $data['longDesc'], $data['baseprice'], $files['img']['name'], $time, $data['stock'], $colour, $cat);
-				$stmt->execute();
+				$stmt=$this->db->prepare("INSERT INTO {$this->table_name} (title, product_desc, product_desc_long, base_price, image, created_at, in_stock, data, category_fs) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				$stmt->bind_param("sssisissi", $post['title'], $post['desc'], $post['longDesc'], $post['baseprice'], $files['img']['name'], $time, $post['stock'], $colour, $cat);
+				if($stmt->execute())header("Location:".APP_URL."shop/prod/{$post['title']}");
+				else return false;
+//				return($stmt->execute()?true:false);
 			}
 
 		}

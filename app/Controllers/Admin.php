@@ -135,8 +135,6 @@ class Admin extends AdminController
 		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
 			$product=new Product();
 			$product->addProduct($_POST, $_FILES);
-//			print_r($_FILES);
-//			print_r($_POST);
 		}
 		$form=new Formbuilder("Prodedit", "POST", "", true);
 		$form->addInput("text", "title", "Title")
