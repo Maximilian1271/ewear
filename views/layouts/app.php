@@ -12,8 +12,6 @@
 </head>
 <body>
 	<div class="app"><?php
-		print_r($_SESSION);
-		echo count($_SESSION);
 		load_global("header");
 		load_view($view, $data);
 		load_global("footer")?>
