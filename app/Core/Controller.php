@@ -11,7 +11,7 @@ class Controller
 	public function __construct()
 	{
 		if (count($_SESSION)>0&&!isset($_SESSION['flyk1XIvh3ncxiLvBoKC'])){
-			Logout::logout(); //Session for some reason invalid, clear Session (happens when using sessions from foreign projects
+			Logout::logout(); //if Session for some reason invalid, clear Session (happens when using sessions from foreign projects)
 		}
 		$this->view=new View();
 	}

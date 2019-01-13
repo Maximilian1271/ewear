@@ -17,7 +17,7 @@ class GuestController extends Controller
 		$this->checkGroup();
 	}
 	public function checkGroup(){
-		if (Sessions::get('login')==1){
+		if (Sessions::get('flyk1XIvh3ncxiLvBoKC')==1){
 			header('Location:'.APP_URL."home");
 		}
 	}

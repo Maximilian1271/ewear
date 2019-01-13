@@ -21,7 +21,7 @@ class View
 	public function render($view, $data = array(), $tpl = "app"){
 		require __DIR__ . "/../../views/layouts/" . $tpl . ".php";
 	}
-	private function loadCSS(){
+	private function loadCSS(){     //load CSS from array if given, to be used via public $files_css=array()
 		$markup = "";
 		if (count($this->files_css) > 0) {
 			foreach ($this->files_css as $file) {
@@ -32,11 +32,10 @@ class View
 			return false;
 		}
 	}
-	private function loadJS(){
+	private function loadJS(){      //load JS from array if given, to be used via public $files_js=array()
 		$markup = "";
 		if (count($this->files_js) > 0) {
 			foreach ($this->files_js as $file) {
-//				$markup .= "<script src='".APP_URL."assets/js/$file'></script>";
 				$markup.="<script src='".APP_URL."assets/js/$file'></script>";
 			}
 			return $markup;
