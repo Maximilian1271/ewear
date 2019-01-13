@@ -12,6 +12,7 @@ namespace app\Controllers;
 use App\Core\AdminController;
 use App\Libs\Formbuilder;
 use App\Libs\Sessions;
+use App\Models\Order;
 use app\Models\Product;
 
 class Admin extends AdminController
@@ -149,4 +150,9 @@ class Admin extends AdminController
 		$this->view->files_css=['admin.css'];
 		$this->view->render("admin/productadd", $data);
 	}
+//	public function order(){
+//		$order=new Order();
+//
+//		$this->view->render("admin/order");
+//	}
 }

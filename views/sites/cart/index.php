@@ -1,4 +1,6 @@
-<?php $total=0;
+<?php
+if (isset($cart)):
+$total=0;
 $user=new \App\Models\User();
 $user=$user->getUserbyId(\App\Libs\Sessions::get('id'));
 $json=json_decode($user['data'], true); ?>
@@ -49,7 +51,6 @@ $json=json_decode($user['data'], true); ?>
 		</form>
 		<div class="info" style="font-size: 8px; margin-top: 20px;"><i style="font-size: 8px" class="req">*</i>=Required field</div>
 	</div>
-	<?php if (isset($cart)):?>
 		<?php foreach ($cart as $item):?>
 		<div class="login">
 			<h2><a href="<?php echo APP_URL."shop/prod/".rawurlencode($item['productinfo']['title'])?>"><?php echo $item['productinfo']['title']?></a></h2>

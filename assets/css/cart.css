@@ -4,7 +4,7 @@ html{
 	min-height: 100%;
 }
 footer{
-	position: absolute;
+	/*position: absolute;*/
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -39,7 +39,7 @@ footer{
 }
 .res{
 	position: fixed;
-	top: 90px;
+	top: 15%;
 	width: 420px;
 	background: #F0F0F0;
 	border-radius: 10px;
@@ -76,6 +76,7 @@ footer{
 	transform-origin: left;
 }
 .option>label>img{
+	cursor: pointer;
 	display: block;
 	width: 64px;
 }
@@ -101,4 +102,19 @@ footer{
 i.req{
 	color: red;
 	font-size: 17px;
+}
+@media screen and (max-width: 1730px){
+	.res{
+		right: 0;
+	}
+}
+@media screen and (max-width: 1550px){
+	.res{
+		width: 374px;
+	}
+}
+@media screen and (max-width: 1460px){
+	.res{
+		position: absolute;
+	}
 }

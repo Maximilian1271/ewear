@@ -18,6 +18,9 @@ class Cart extends Model{
 		$id=Sessions::get('id');
 		return $this->db->query("SELECT * FROM {$this->table_name} WHERE user_fs=$id")->fetch_assoc();
 	}
+	public function getCartByCartId($id){
+		return $this->db->query("SELECT data FROM {$this->table_name} WHERE id=$id")->fetch_assoc();
+	}
 	public function createCart($id=null){
 		if($id!=null){
 			$this->db->query("INSERT INTO {$this->table_name} (user_fs) VALUE ($id)");

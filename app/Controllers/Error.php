@@ -24,6 +24,10 @@ class error extends Controller {
 		$data['code']="Your Cart seems to be empty";
 		$this->view->render("error/error", $data);
 	}
+	public function checkout(){
+		$data['code']="You may not order an empty cart";
+		$this->view->render("error/error", $data);
+	}
 	public function empty(){
 		$data['code']="Your Query returned no results. We are sorry about that";
 		$this->view->render("error/error", $data);

@@ -276,3 +276,9 @@ div.field.checkbox,div.field.button{
 	color: #D19650;
 	text-decoration: underline;
 }
+
+@media screen and (max-width: 1460px) {
+	.login {
+		width: 33.5%;
+	}
+}

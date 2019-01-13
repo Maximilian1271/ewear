@@ -16,13 +16,17 @@ class Order extends Model
 {
 	protected $table_name="orders";
 
-	public function placeOrder(){
+	public function placeOrder($address){
 		$time=time();
+		$user_fs=Sessions::get('id');
 		$cart=new Cart();
 		$cart=$cart->getCart();
 		$cart=$cart['data'];
-		$stmt=$this->db->prepare("INSERT INTO {$this->table_name} (cart_data, user_fs, created_at) VALUES (?, ?, ?)");
-		$stmt->bind_param("sii", $cart, Sessions::get('id'), $time);
-		$stmt->execute();
+		$stmt=$this->db->prepare("INSERT INTO {$this->table_name} (cart_data, user_fs, address, created_at) VALUES (?, ?, ?, ?)");
+		$stmt->bind_param("sisi", $cart, $user_fs, $address, $time);
+		return $stmt->execute();
+	}
+	public function getOrders(){
+		return $this->db->query("SELECT * FROM {$this->table_name}")->fetch_all();
 	}
 }

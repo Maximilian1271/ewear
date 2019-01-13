@@ -28,6 +28,7 @@
 	width: 1180px;
 	max-width: 1180px;
 	position: relative;
+	margin: 0 auto;
 }
 .nav-left,.nav-right{
 	position: absolute;
@@ -69,7 +70,7 @@
 .container>.grid:nth-child(1n) {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-row-gap: 25px;
+	grid-row-gap: 2.5%;
 	grid-column-gap: 25px;
 	grid-template-rows: 1fr 1fr;
 	grid-template-areas: "desc desc img img2" "img3 img4 img5 img6";
@@ -107,3 +108,16 @@
 
 .img6 { grid-area: img6; }
 
+@media screen and (max-width: 1180px) {
+	.slider {
+		width: 100%;
+		max-width: 100%;
+	}
+	.container>.grid:nth-child(1n){
+		-webkit-transform: scale(.5);
+		-moz-transform: scale(.5);
+		-ms-transform: scale(.5);
+		-o-transform: scale(.5);
+		transform: scale(.5);
+	}
+}

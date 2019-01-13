@@ -39,19 +39,38 @@ class Cart extends UserController {
 		header("Location:". APP_URL."home");
 	}
 	public function checkout(){
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&& isset($_POST['place'])) {
-			$cart=new \app\Models\Cart();
-			$shipping=array(
-				"Name"=>$_POST['name'],
-				"Address"=>$_POST['address'],
-				"Postal Code (ZIP)"=>$_POST['zip'],
-				"Payment Method"=>$_POST['pay']
-			);
-			$data['shipping']=$shipping;
-			$data['cart']=$cart->resolveCart();
-			$this->view->files_css=["login.css", "user.css", "cart.css"];
-			$this->view->render("cart/checkout", $data);
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
+			if (isset($_POST['place'])){
+				$cart=new \app\Models\Cart();
+				$shipping=array(
+					"Name"=>$_POST['name'],
+					"Address"=>$_POST['address'],
+					"Postal Code (ZIP)"=>$_POST['zip'],
+					"Payment Method"=>$_POST['pay']
+				);
+				$data['shipping']=$shipping;
+				$data['cart']=$cart->resolveCart();
+				$data['cartid']=$cart->getCart();
+				$this->view->files_css=["login.css", "user.css", "cart.css"];
+				$this->view->render("cart/checkout", $data);
+			}
 		}
-		else echo "You may not order an empty cart";
+		else header("Location:".APP_URL."error/checkout");
+	}
+	public function orderSuccess(){
+		$cart=new \app\Models\Cart();
+		$address=array(
+			"Name"=>$_POST['Name'],
+			"Address"=>$_POST['Address'],
+			"Postal_Code_(ZIP)"=>$_POST['Postal_Code_(ZIP)'],
+			"Payment_Method"=>$_POST['Payment_Method'],
+		);
+		$address=json_encode($address);
+		$order=new Order();
+		if($order->placeOrder($address)){
+			$cart->clearCart();
+			$this->view->render("cart/success");
+		}else die("There has been an error with your request"); //this should normally only happen if the db is down so idc atm
+
 	}
 }
