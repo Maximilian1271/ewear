@@ -8,7 +8,7 @@
 			</form>
 		</div>
 		<div class="options">
-			<?php if(\App\Libs\Sessions::get('login')==1): ?>
+			<?php if(\App\Libs\Sessions::get('flyk1XIvh3ncxiLvBoKC')==1): ?>
 				<a href="<?php echo APP_URL."user"?>">Account</a>
 				<a href="<?php echo APP_URL."logout"?>">Sign Out</a>
 			<?php else: ?>

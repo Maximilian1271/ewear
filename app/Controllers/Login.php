@@ -49,7 +49,7 @@ class Login extends GuestController {
 						Sessions::del("cart_count");
 						Sessions::set("uname", $account['uname']);
 						Sessions::set("id", $account['id']);
-						Sessions::set("login", true);
+						Sessions::set("flyk1XIvh3ncxiLvBoKC", true);
 						Sessions::set("user_group", $account['roles_fs']);
 						Sessions::set("cart_count", $cart->getCartCount());
 						header("Location:".APP_URL."home");

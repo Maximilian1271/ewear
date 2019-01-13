@@ -1,5 +1,6 @@
 <?php
 namespace App\Core;
+use App\Libs\Logout;
 use App\Libs\Sessions;
 use App\Models\User;
 
@@ -9,10 +10,10 @@ class View
 	public $files_js = array();
 
 	public function __construct(){
-		if (isset($_SESSION['login'])){
+		if (isset($_SESSION)&&isset($_SESSION['flyk1XIvh3ncxiLvBoKC'])){    //check if user has been locked, if so immediately log out
 			$checkuser=new User();
 			if($checkuser->checkLock(Sessions::get("id"))==true){
-				header("Location:".APP_URL."logout");
+				Logout::logout();
 			}
 		}
 	}
