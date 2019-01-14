@@ -69,6 +69,8 @@ class Cart extends UserController {
 		$order=new Order();
 		if($order->placeOrder($address)){
 			$cart->clearCart();
+			$this->view->files_js=["lottie.min.js", "checkmark.js"];
+			$this->view->files_css=["login.css"];
 			$this->view->render("cart/success");
 		}else die("There has been an error with your request"); //this should normally only happen if the db is down so idc atm
 
