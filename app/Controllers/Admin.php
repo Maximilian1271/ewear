@@ -150,9 +150,81 @@ class Admin extends AdminController
 		$this->view->files_css=['admin.css'];
 		$this->view->render("admin/productadd", $data);
 	}
-//	public function order(){
-//		$order=new Order();
-//
-//		$this->view->render("admin/order");
-//	}
+	public function order(){
+		$user=new \App\Models\User();
+		$markup="";
+		foreach ($user->getAll() as $row) {
+			$json=json_decode($row['data'], true);
+			if($row['roles_fs']>1){
+				$markup.="<tr class='admin'>";
+			}
+			elseif ($row['locked']==1){
+				$markup.="<tr class='locked'>";
+			}
+			else $markup.="<tr>";
+			$markup.="<td>{$json['name']}</td><td>{$json['surname']}</td><td>{$row['uname']}</td><td>{$row['email']}</td>";
+			$markup.="<td><a href='orderlist/{$row['id']}'>Show Orders</a></td>";
+			$markup.="</tr>";
+		}
+		$data['userList']=$markup;
+		$this->view->files_css=["admin.css"];
+		$this->view->render("admin/order", $data);
+	}
+	public function orderlist($id){
+		$orders=new Order();
+		$data['orders']=$orders->getOrders($id);
+		$this->view->files_css=['login.css', "cart.css"];
+		$this->view->render("admin/orderlist", $data);
+	}
+	public function orderdetail($id){
+		$order=new Order();
+		$order=$order->getOrderDetailsByOrderId($id);
+		$markup="";
+//		foreach($order->getOrderDetailsByOrderId($id) as $key=>$row){
+			$jsonAddress=json_decode($order['address'], true);
+			$jsonCart=json_decode(str_replace("::", "", $order['cart_data']), true);
+			$prodname=new Product();
+			$product=$prodname->getProductById($jsonCart['id']);
+			$markup="";
+			$markup.="<tr>";
+			$markup.="<td>Name:{$jsonAddress['Name']}, Address: {$jsonAddress['Address']}, {$jsonAddress['Postal_Code_(ZIP)']}</td>";
+			$markup.="<td>Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']}</td>";
+			$markup.="<td>".date("F j, Y, g:i a", $order['created_at'])."</td>";
+			$markup.="<td>{$order['StatusName']}";
+//			switch ($order['status']){
+//				case 0:
+//					$markup.="Processing";
+//					break;
+//				case 1:
+//					$markup.="Delivered";
+//					break;
+//				case 2:
+//					$markup.="Delayed";
+//					break;
+//				case 3:
+//					$markup.="Awaiting Return";
+//					break;
+//				default:
+//					$markup.="Error";
+//					break;
+//			}
+			$markup.="</td>";
+			$markup.="<td><a href='".APP_URL."admin/delay/$id"."'>Mark as Delayed</a></td><td><a href='".APP_URL."admin/deliver/$id"."'>Mark as Delivered</a> </td>";
+//		}
+		$data['order']=$markup;
+		$this->view->files_css=['login.css'];
+		$this->view->render("admin/orderdetail", $data);
+	}
+	public function delay($id){
+		$order= new Order();
+		if($order->delay($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
+	}
+	public function deliver($id){
+		$order= new Order();
+		if($order->deliver($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
+	}
 }

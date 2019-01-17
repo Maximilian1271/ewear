@@ -19,6 +19,7 @@
 		<?php foreach ($shipping as $key => $item):?>
 			<input type="hidden" name="<?php echo $key?>" value="<?php echo $item?>">
 		<?php endforeach;?>
+		<input type="hidden" name="csrf" value="<?php echo set_csrf()?>">
 		<button type="submit" class="order" id="confirmOrder" name="confirmOrder" style="display:block; float: initial; margin: 0 auto;">Confirm Order</button>
 	</form>
 	</div>

@@ -32,4 +32,9 @@ class error extends Controller {
 		$data['code']="Your Query returned no results. We are sorry about that";
 		$this->view->render("error/error", $data);
 	}
+	public function csrf(){
+		$data['code']="You may not order the same order, twice in a row (csrf mismatch)";
+		$data['home']=true;
+		$this->view->render("error/error", $data);
+	}
 }

@@ -10,6 +10,7 @@ namespace app\Controllers;
 
 
 use App\Core\UserController;
+use App\Libs\Formbuilder;
 use App\Libs\Sessions;
 use app\Models\Order;
 
@@ -67,12 +68,14 @@ class Cart extends UserController {
 		);
 		$address=json_encode($address);
 		$order=new Order();
-		if($order->placeOrder($address)){
-			$cart->clearCart();
-			$this->view->files_js=["lottie.min.js", "checkmark.js"];
-			$this->view->files_css=["login.css"];
-			$this->view->render("cart/success");
-		}else die("There has been an error with your request"); //this should normally only happen if the db is down so idc atm
-
+		if (check_csrf($_POST['csrf'])){
+			if($order->placeOrder($address)){
+				$cart->clearCart();
+				unset($_SESSION['csrf']);
+				$this->view->files_js=["lottie.min.js", "checkmark.js"];
+				$this->view->files_css=["login.css"];
+				$this->view->render("cart/success");
+			}else die("There has been an error with your request"); //this should normally only happen if the db is down so idc atm
+		}else header("Location:".APP_URL."error/csrf");
 	}
 }
