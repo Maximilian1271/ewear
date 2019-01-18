@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="control">
-	<h2>ProductControl</h2>
+		<h2>ProductControl</h2>
 		<table>
 			<thead>
 			<th>Product Name</th>
@@ -15,7 +15,5 @@
 			<?php echo $prod;?>
 		</table>
 		<br>
-		<a href="productadd">Add Product</a>
-		<a href="<?php echo APP_URL."admin/trash"?>" style="float: right">Deleted Products</a>
 	</div>
 </div>

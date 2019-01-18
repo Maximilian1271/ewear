@@ -87,7 +87,7 @@ class Admin extends AdminController
 			$this->view->render("admin/useredit", $data);
 		}else header("Location:".APP_URL."admin/user");
 	}
-	public function product($id=null){
+	public function product(){
 		$prod=new Product();
 		$markup="";
 		foreach($prod->getAll() as $product){
@@ -111,6 +111,36 @@ class Admin extends AdminController
 		$data['prod']=$markup;
 		$this->view->render("admin/product", $data);
 	}
+	public function trash(){
+		$prod=new Product();
+		$markup="";
+		foreach($prod->getAllTrash() as $product){
+			$img=explode("/", $product['image']);
+			$img=end($img);
+			$date=date("D M j Y, G:i:s", $product['created_at']);
+			if ($product['in_stock']==="1"){
+				$markup.="<tr class='instock'>";
+				$status="yes";
+			}
+			elseif ($product['in_stock']==="0"){
+				$markup.="<tr class='outstock'>";
+				$status="no";
+			}
+
+			$markup.="<td><a href=\"".APP_URL."shop/prod/{$product['title']}\">{$product['title']}</a></td><td>{$product['product_desc']}</td><td>{$product['base_price']}</td><td>$img</td><td>$date</td><td>$status</td><td>{$product['CategoryName']}</td>";
+			$markup.="<td><a href='undelete/{$product['id']}'>Undelete</a></td>";
+			$markup.="</tr>";
+		}
+		$this->view->files_css=["admin.css"];
+		$data['prod']=$markup;
+		$this->view->render("admin/trash", $data);
+	}
+	public function undelete($id){
+		$product=new Product();
+		if($product->undelete($id)){
+			header("Location:".APP_URL."admin/trash");
+		}
+	}
 	public function prodedit($id){
 		$product=new Product();
 		$selected=$product->getProductById($id);
@@ -120,12 +150,19 @@ class Admin extends AdminController
 		->addInput("number", "InStock", "In Stock", ["value"=>$selected['in_stock'], "min"=>"0", "max"=>"1"])
 		->addInput("number", "basePrice", "Base Price", ["value"=>$selected['base_price'], "min"=>"0"])
 		->addTextarea("desLong", "Long Description", $selected['product_desc_long'])
-		->addButton("update", "update");
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
-			if($product->updateProductById($id, $_POST)){
+		->addInput("file", "img", "Product Image", ["accept"=>"image/*"])
+		->addButton("update", "update")
+		->addButton("del", "Softdelete this Product");
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&&!isset($_POST['del'])){
+			if($product->updateProductById($id, $_POST, $_FILES)){
 				header("Location: ".APP_URL."admin/prodedit/".$id);
 			}
 			else die("An error has occured");
+		}
+		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&&isset($_POST['del'])){
+			if($product->softDeleteById($id)){
+				header("Location:".APP_URL."admin/product");
+			}else die("An error occured");
 		}
 		$data['prod']=$selected;
 		$data['form']=$form->output();
