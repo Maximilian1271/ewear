@@ -1,12 +1,12 @@
 <div class="container">
 	<table>
 		<thead>
-		<th>Address</th>
-		<th>Order Content</th>
-		<th>Order Date</th>
-		<th>Order Status</th>
-		<th> </th>
-		<th> </th>
+		<th class="verticalSplit">Address</th>
+		<th class="verticalSplit">Order Content</th>
+		<th class="verticalSplit">Order Date</th>
+		<th class="verticalSplit">Order Status</th>
+		<th class="noborder"> </th>
+		<th class="noborder"> </th>
 		</thead>
 		<?php echo $order?>
 	</table>

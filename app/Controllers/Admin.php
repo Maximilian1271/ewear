@@ -180,39 +180,37 @@ class Admin extends AdminController
 		$order=new Order();
 		$order=$order->getOrderDetailsByOrderId($id);
 		$markup="";
-//		foreach($order->getOrderDetailsByOrderId($id) as $key=>$row){
 			$jsonAddress=json_decode($order['address'], true);
-			$jsonCart=json_decode(str_replace("::", "", $order['cart_data']), true);
-			$prodname=new Product();
-			$product=$prodname->getProductById($jsonCart['id']);
+
+
 			$markup="";
 			$markup.="<tr>";
-			$markup.="<td>Name:{$jsonAddress['Name']}, Address: {$jsonAddress['Address']}, {$jsonAddress['Postal_Code_(ZIP)']}</td>";
-			$markup.="<td>Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']}</td>";
-			$markup.="<td>".date("F j, Y, g:i a", $order['created_at'])."</td>";
-			$markup.="<td>{$order['StatusName']}";
-//			switch ($order['status']){
-//				case 0:
-//					$markup.="Processing";
-//					break;
-//				case 1:
-//					$markup.="Delivered";
-//					break;
-//				case 2:
-//					$markup.="Delayed";
-//					break;
-//				case 3:
-//					$markup.="Awaiting Return";
-//					break;
-//				default:
-//					$markup.="Error";
-//					break;
-//			}
+			$markup.="<td class='verticalSplit'>Name:{$jsonAddress['Name']}, Address: {$jsonAddress['Address']}, {$jsonAddress['Postal_Code_(ZIP)']}</td>";
+			if(count(explode("::", $order['cart_data']))>2){
+				$markup.="<td class='verticalSplit'>";
+				foreach (explode("::", $order['cart_data']) as $item){
+					$jsonCart=json_decode($item, true);
+					$prodname=new Product();
+					if($jsonCart!=NULL){ //Sloppy explode fix. First array index will always be NULL since cart data starts with "::"
+						$product=$prodname->getProductById($jsonCart['id']);
+						$markup.="Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']} <br>";
+					}
+
+				}
+				$markup.="</td>";
+			}
+			else{
+				$jsonCart=json_decode(str_replace("::", "", $order['cart_data']), true);
+				$prodname=new Product();
+				$product=$prodname->getProductById($jsonCart['id']);
+				$markup.="<td class='verticalSplit'>Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']}</td>";
+			}
+			$markup.="<td class='verticalSplit'>".date("F j, Y, g:i a", $order['created_at'])."</td>";
+			$markup.="<td class='verticalSplit'>{$order['StatusName']}";
 			$markup.="</td>";
-			$markup.="<td><a href='".APP_URL."admin/delay/$id"."'>Mark as Delayed</a></td><td><a href='".APP_URL."admin/deliver/$id"."'>Mark as Delivered</a> </td>";
-//		}
+			$markup.="<td class='noborder'><a href='".APP_URL."admin/delay/$id"."'>Mark as Delayed</a></td><td class='noborder'><a href='".APP_URL."admin/deliver/$id"."'>Mark as Delivered</a> </td><td class='noborder'><a href='".APP_URL."admin/processing/$id"."'>Mark as Processing</a> </td>";
 		$data['order']=$markup;
-		$this->view->files_css=['login.css'];
+		$this->view->files_css=['login.css', 'orderdetail.css'];
 		$this->view->render("admin/orderdetail", $data);
 	}
 	public function delay($id){
@@ -224,6 +222,12 @@ class Admin extends AdminController
 	public function deliver($id){
 		$order= new Order();
 		if($order->deliver($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
+	}
+	public function processing($id){
+		$order= new Order();
+		if($order->process($id)){
 			header("Location:".APP_URL."admin/orderdetail/".$id);
 		}else die("An error occured with the DB");
 	}
