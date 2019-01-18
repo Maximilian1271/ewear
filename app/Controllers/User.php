@@ -59,6 +59,15 @@ class User extends UserController
 		$this->view->files_css=['login.css', "cart.css"];
 		$this->view->render("user/orders", $data);
 	}
+	public function order($id){
+		$order=new Order();
+		$order=$order->getOrderDetailsByOrderId($id);
+		if ($_SESSION['id']!=$order['user_fs']){
+			die("You may not watch orders whom you are not the purchaser from, sorry");
+		}else{
+			die("Now we are talking :)");
+		}
+	}
 	private function validate(){
 		$val=new Validator();
 		$val->val($_POST['name'], "Name", true, "textnum", 2, 50);

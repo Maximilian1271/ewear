@@ -18,12 +18,13 @@ class Order extends Model
 
 	public function placeOrder($address){
 		$time=time();
+		$uniqueid=uniqid("", true);
 		$user_fs=Sessions::get('id');
 		$cart=new Cart();
 		$cart=$cart->getCart();
 		$cart=$cart['data'];
-		$stmt=$this->db->prepare("INSERT INTO {$this->table_name} (cart_data, user_fs, address, created_at) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("sisi", $cart, $user_fs, $address, $time);
+		$stmt=$this->db->prepare("INSERT INTO {$this->table_name} (cart_data, user_fs, address, created_at, uniqid) VALUES (?, ?, ?, ?, ?)");
+		$stmt->bind_param("sisis", $cart, $user_fs, $address, $time, $uniqueid);
 		return $stmt->execute();
 	}
 	public function getOrders($id){
@@ -32,15 +33,15 @@ class Order extends Model
 		}else return $this->db->query("SELECT orders.*,orderstatus.StatusName FROM {$this->table_name} LEFT JOIN orderstatus ON orders.status=orderstatus.status_fs ORDER BY created_at DESC")->fetch_all();
 	}
 	public function getOrderDetailsByOrderId($id){
-		return (isset($id)?$this->db->query("SELECT orders.*,orderstatus.StatusName FROM {$this->table_name} LEFT JOIN orderstatus ON orders.status=orderstatus.status_fs WHERE orders.id=$id LIMIT 1")->fetch_assoc():false);
+		return (isset($id)?$this->db->query("SELECT orders.*,orderstatus.StatusName FROM {$this->table_name} LEFT JOIN orderstatus ON orders.status=orderstatus.status_fs WHERE orders.uniqid='$id' LIMIT 1")->fetch_assoc():false);
 	}
 	public function delay($id){
-		return $this->db->query("UPDATE {$this->table_name} SET status=2 WHERE id=$id");
+		return $this->db->query("UPDATE {$this->table_name} SET status=2 WHERE uniqid='$id'");
 	}
 	public function deliver($id){
-		return $this->db->query("UPDATE {$this->table_name} SET status=1 WHERE id=$id");
+		return $this->db->query("UPDATE {$this->table_name} SET status=1 WHERE uniqid='$id'");
 	}
 	public function process($id){
-		return $this->db->query("UPDATE {$this->table_name} SET status=0 WHERE id=$id");
+		return $this->db->query("UPDATE {$this->table_name} SET status=0 WHERE uniqid='$id'");
 	}
 }
