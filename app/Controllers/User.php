@@ -13,6 +13,7 @@ use App\Core\UserController;
 use App\Libs\Formbuilder;
 use App\Libs\Sessions;
 use App\Libs\Validator;
+use App\Models\Order;
 
 class User extends UserController
 {
@@ -51,6 +52,12 @@ class User extends UserController
 			}
 		}
 		$this->view->render("user/edit", $data);
+	}
+	public function orders(){
+		$order=new Order();
+		$data['orders']=$order->getOrders($_SESSION['id']);
+		$this->view->files_css=['login.css', "cart.css"];
+		$this->view->render("user/orders", $data);
 	}
 	private function validate(){
 		$val=new Validator();

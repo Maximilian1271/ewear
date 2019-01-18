@@ -126,7 +126,6 @@ class Admin extends AdminController
 				$markup.="<tr class='outstock'>";
 				$status="no";
 			}
-
 			$markup.="<td><a href=\"".APP_URL."shop/prod/{$product['title']}\">{$product['title']}</a></td><td>{$product['product_desc']}</td><td>{$product['base_price']}</td><td>$img</td><td>$date</td><td>$status</td><td>{$product['CategoryName']}</td>";
 			$markup.="<td><a href='undelete/{$product['id']}'>Undelete</a></td>";
 			$markup.="</tr>";
@@ -218,8 +217,6 @@ class Admin extends AdminController
 		$order=$order->getOrderDetailsByOrderId($id);
 		$markup="";
 			$jsonAddress=json_decode($order['address'], true);
-
-
 			$markup="";
 			$markup.="<tr>";
 			$markup.="<td class='verticalSplit'>Name:{$jsonAddress['Name']}, Address: {$jsonAddress['Address']}, {$jsonAddress['Postal_Code_(ZIP)']}</td>";
@@ -232,7 +229,6 @@ class Admin extends AdminController
 						$product=$prodname->getProductById($jsonCart['id']);
 						$markup.="Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']} <br>";
 					}
-
 				}
 				$markup.="</td>";
 			}

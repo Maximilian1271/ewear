@@ -49,7 +49,4 @@ class Shop extends Controller
 		$this->view->files_css=['product.css'];
 		$this->view->render("shop/prod", $data);
 	}
-	public function search(){
-
-	}
 }

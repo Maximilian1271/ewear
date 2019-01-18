@@ -29,7 +29,6 @@ class Product extends Model{
 		$sql="SELECT * FROM {$this->table_name} WHERE id=$id LIMIT 1";
 		$stmt=$this->db->query($sql)->fetch_assoc();
 		return $stmt;
-//		return $this->db->query("SELECT * FROM {$this->table_name} WHERE id=$id LIMIT 1")->fetch_all(MYSQLI_ASSOC);
 	}
 	public function getAll(){
 		$sql="SELECT {$this->table_name}.*, productcategory.CategoryName FROM {$this->table_name} LEFT JOIN productcategory ON category_fs=productcategory.id";
@@ -82,7 +81,6 @@ class Product extends Model{
 				$stmt->bind_param("sssisissi", $post['title'], $post['desc'], $post['longDesc'], $post['baseprice'], $files['img']['name'], $time, $post['stock'], $colour, $cat);
 				if($stmt->execute())header("Location:".APP_URL."shop/prod/{$post['title']}");
 				else return false;
-//				return($stmt->execute()?true:false);
 			}
 
 		}

@@ -17,7 +17,6 @@ class View
 			}
 		}
 	}
-
 	public function render($view, $data = array(), $tpl = "app"){
 		require __DIR__ . "/../../views/layouts/" . $tpl . ".php";
 	}

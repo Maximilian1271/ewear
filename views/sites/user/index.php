@@ -14,7 +14,9 @@
 			<li><?php echo $user['email'] ?></li>
 			<li>Address:</li>
 			<li><?php echo(empty($json['address'])||empty($json['address'])?"Not set":$json['address']." ".$json['zip']) ?></li>
-			<li style="text-align: right; margin-right: 50px"><a href="user/edit">Found a mistake? Edit!</a></li>
+			<br>
+			<li style="font-weight: bold; float: left; margin-left: 50px"><a href="user/orders">Past Orders</a></li>
+			<li style="font-weight: bold; float: right; margin-right: 50px"><a href="user/edit">Found a mistake? Edit!</a></li>
 		</ul>
 		<?php else:?>
 		<p>A fatal error has occured</p>
