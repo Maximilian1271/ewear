@@ -63,9 +63,11 @@ class User extends UserController
 		$order=new Order();
 		$order=$order->getOrderDetailsByOrderId($id);
 		if ($_SESSION['id']!=$order['user_fs']){
-			die("You may not watch orders whom you are not the purchaser from, sorry");
+			die("You may not watch orders whom you are not the purchaser from, sorry"); //In the unlikely case that a user guesses another users uniqid. This is basically impossible but i implemented this before using uniqid's but rather order id's, which was, frankly, quite stupid
 		}else{
-			die("Now we are talking :)");
+			$data['order']=$order; //hand over order detail to view and render
+			$this->view->files_css=["login.css", "cart.css"];
+			$this->view->render("user/order", $data);
 		}
 	}
 	private function validate(){

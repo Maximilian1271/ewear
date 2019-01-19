@@ -32,15 +32,15 @@ $json=json_decode($user['data'], true); ?>
 			<h4>Payment Options<i class="req">*</i>:</h4>
 			<div class="pay">
 				<div class="option">
-					<input type="radio" name="pay" id="mastercard" value="mastercard" required>
+					<input type="radio" name="pay" id="Mastercard" value="Mastercard" required>
 					<label for="mastercard"><img src="assets/images/mastercard.png" alt="mastercard-logo"></label>
 				</div>
 				<div class="option">
-					<input type="radio" name="pay" id="paypal" value="paypal" required>
+					<input type="radio" name="pay" id="Paypal" value="Paypal" required>
 					<label for="paypal"><img src="assets/images/paypal.png" alt="paypal-logo"></label>
 				</div>
 				<div class="option">
-					<input type="radio" name="pay" id="bank" value="bank" required>
+					<input type="radio" name="pay" id="Bank" value="Bank" required>
 					<label for="bank"><img src="assets/images/Girocard_mit_Rand_hochformat_cmyk.png" alt="girocard-logo"></label>
 				</div>
 			</div>
