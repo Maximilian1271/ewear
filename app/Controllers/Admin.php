@@ -179,7 +179,7 @@ class Admin extends AdminController
 			->addInput("number", "stock", "In Stock", ["min"=>0, "max"=>1, "value"=>1])
 			->addInput("number", "baseprice", "Base Price", ["min"=>0])
 			->addTextarea("longDesc", "Long Description")
-			->addInput("text", "colour", "Colour Variants")
+			->addInput("text", "colour", "Colour Variants", ["placeholder"=>"Separate values with commas"])
 			->addInput("file", "img", "Product Image", ["accept"=>"image/*"])
 			->addButton("submit", "submit");
 		$data['form']=$form->output();

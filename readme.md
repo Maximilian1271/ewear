@@ -1,4 +1,4 @@
-!! bitte stellen sie sicher das beim zugriff auf das projekt, sämtliche $_SESSION's gelöscht wurden. Sollte dies nicht der fall sein und sie bekommen den fehler: "Fatal error: Uncaught Error: Call to a member function fetch_row() on boolean in C:\xampp\htdocs\ewear\app\Models\User.php:112", rufen sie bitte die logout methode indem sie die seite "localhost/ewear/logout" besuchen. Dies ist ein fehler der nur in einer entwickungsumgebung auftritt und beeinflusst das projekt nicht !!
+$_Session Fehler wurde gefixt, $_Sessions von anderen projekten sollten nun gelöscht werden
 
 
 um einen reibunglosen ablauf zu gewährleisten, ändern sie bitte in app->config->paths.php die konstante "APP_URL" so dass das root directory gleich dem projektnamen ist. Sollte der Projektname "ewear" sein, so sind keine änderungen notwendig. Sollte der Projektname "beispiel1" sein, so nennen sie bitte die konstante "http://localhost/beispiel1/"
@@ -11,17 +11,14 @@ usernames sind case sensitive
 
 passwörter sind case sensitive
 
-usernames sind in der datenbank unter der tabelle "users" zu finden. Der admin account hat die login daten username: admin, passwort: hallo123
-
-nur user mit dem access level 2 haben zugriff zu administrativen funktionen
-
-csrf methoden wurden geschrieben, jedoch für die entwicklung deaktiviert
-
+admin account: admin (passwort: hallo123)
+user account: fschaumann (passwort: hallo123)
 
 
 Folgende aufgaben wurden leider nicht erfüllt:
--Das projekt ist nicht reponsive. Getestet wurde auf einem 1920x1080 monitor
--order cart ist nicht vorhanden
--/admin/OrderControl ist nicht vorhanden
+Alle aufgaben wurden erfüllt
 
-dennoch hoffe ich auf eine gute beurteilung!
+Zusätzliche Aufgaben wurden erfüllt:
+-Dem User wird im Warenkorb bzw. vorm Bestellabschluß ermöglicht eine alternative
+Lieferadresse anzugeben.
+-clientseitige Formularvalidierung
