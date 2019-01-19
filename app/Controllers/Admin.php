@@ -12,6 +12,7 @@ namespace app\Controllers;
 use App\Core\AdminController;
 use App\Libs\Formbuilder;
 use App\Libs\Sessions;
+use App\Models\Order;
 use app\Models\Product;
 
 class Admin extends AdminController
@@ -86,7 +87,7 @@ class Admin extends AdminController
 			$this->view->render("admin/useredit", $data);
 		}else header("Location:".APP_URL."admin/user");
 	}
-	public function product($id=null){
+	public function product(){
 		$prod=new Product();
 		$markup="";
 		foreach($prod->getAll() as $product){
@@ -110,21 +111,57 @@ class Admin extends AdminController
 		$data['prod']=$markup;
 		$this->view->render("admin/product", $data);
 	}
+	public function trash(){
+		$prod=new Product();
+		$markup="";
+		foreach($prod->getAllTrash() as $product){
+			$img=explode("/", $product['image']);
+			$img=end($img);
+			$date=date("D M j Y, G:i:s", $product['created_at']);
+			if ($product['in_stock']==="1"){
+				$markup.="<tr class='instock'>";
+				$status="yes";
+			}
+			elseif ($product['in_stock']==="0"){
+				$markup.="<tr class='outstock'>";
+				$status="no";
+			}
+			$markup.="<td><a href=\"".APP_URL."shop/prod/{$product['title']}\">{$product['title']}</a></td><td>{$product['product_desc']}</td><td>{$product['base_price']}</td><td>$img</td><td>$date</td><td>$status</td><td>{$product['CategoryName']}</td>";
+			$markup.="<td><a href='undelete/{$product['id']}'>Undelete</a></td>";
+			$markup.="</tr>";
+		}
+		$this->view->files_css=["admin.css"];
+		$data['prod']=$markup;
+		$this->view->render("admin/trash", $data);
+	}
+	public function undelete($id){
+		$product=new Product();
+		if($product->undelete($id)){
+			header("Location:".APP_URL."admin/trash");
+		}
+	}
 	public function prodedit($id){
 		$product=new Product();
 		$selected=$product->getProductById($id);
 		$form=new Formbuilder("Prodedit", "POST", "", true);
 		$form->addInput("text", "Title", "Title", ["value"=>$selected['title']])
-		->addInput("text", "DescShort", "Short Text", ["value"=>$selected['product_desc']])
+		->addInput("text", "DescShort", "Short Description", ["value"=>$selected['product_desc']])
 		->addInput("number", "InStock", "In Stock", ["value"=>$selected['in_stock'], "min"=>"0", "max"=>"1"])
 		->addInput("number", "basePrice", "Base Price", ["value"=>$selected['base_price'], "min"=>"0"])
-		->addTextarea("desLong", "Long Text", $selected['product_desc_long'])
-		->addButton("update", "update");
-		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"){
-			if($product->updateProductById($id, $_POST)){
+		->addTextarea("desLong", "Long Description", $selected['product_desc_long'])
+		->addInput("file", "img", "Product Image", ["accept"=>"image/*"])
+		->addButton("update", "update")
+		->addButton("del", "Softdelete this Product");
+		if(!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&&!isset($_POST['del'])){
+			if($product->updateProductById($id, $_POST, $_FILES)){
 				header("Location: ".APP_URL."admin/prodedit/".$id);
 			}
 			else die("An error has occured");
+		}
+		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST"&&isset($_POST['del'])){
+			if($product->softDeleteById($id)){
+				header("Location:".APP_URL."admin/product");
+			}else die("An error occured");
 		}
 		$data['prod']=$selected;
 		$data['form']=$form->output();
@@ -132,6 +169,101 @@ class Admin extends AdminController
 		$this->view->render("admin/prodedit", $data);
 	}
 	public function productAdd(){
-		$this->view->render("admin/productadd");
+		if (!empty($_POST) && $_SERVER['REQUEST_METHOD'] == "POST") {
+			$product=new Product();
+			$product->addProduct($_POST, $_FILES);
+		}
+		$form=new Formbuilder("Prodedit", "POST", "", true);
+		$form->addInput("text", "title", "Title")
+			->addInput("text", "desc", "Short Description")
+			->addInput("number", "stock", "In Stock", ["min"=>0, "max"=>1, "value"=>1])
+			->addInput("number", "baseprice", "Base Price", ["min"=>0])
+			->addTextarea("longDesc", "Long Description")
+			->addInput("text", "colour", "Colour Variants", ["placeholder"=>"Separate values with commas"])
+			->addInput("file", "img", "Product Image", ["accept"=>"image/*"])
+			->addButton("submit", "submit");
+		$data['form']=$form->output();
+		$this->view->files_css=['admin.css'];
+		$this->view->render("admin/productadd", $data);
+	}
+	public function order(){
+		$user=new \App\Models\User();
+		$markup="";
+		foreach ($user->getAll() as $row) {
+			$json=json_decode($row['data'], true);
+			if($row['roles_fs']>1){
+				$markup.="<tr class='admin'>";
+			}
+			elseif ($row['locked']==1){
+				$markup.="<tr class='locked'>";
+			}
+			else $markup.="<tr>";
+			$markup.="<td>{$json['name']}</td><td>{$json['surname']}</td><td>{$row['uname']}</td><td>{$row['email']}</td>";
+			$markup.="<td><a href='orderlist/{$row['id']}'>Show Orders</a></td>";
+			$markup.="</tr>";
+		}
+		$data['userList']=$markup;
+		$this->view->files_css=["admin.css"];
+		$this->view->render("admin/order", $data);
+	}
+	public function orderlist($id){
+		$orders=new Order();
+		$data['orders']=$orders->getOrders($id);
+		$this->view->files_css=['login.css', "cart.css"];
+		$this->view->render("admin/orderlist", $data);
+	}
+	public function orderdetail($id){
+		$order=new Order();
+		$order=$order->getOrderDetailsByOrderId($id);
+		$markup="";
+			$jsonAddress=json_decode($order['address'], true);
+			$markup="";
+			$markup.="<tr>";
+			$markup.="<td class='verticalSplit'>Name:{$jsonAddress['Name']}, Address: {$jsonAddress['Address']}, {$jsonAddress['Postal_Code_(ZIP)']}</td>";
+			if(count(explode("::", $order['cart_data']))>2){
+				$markup.="<td class='verticalSplit'>";
+				foreach (explode("::", $order['cart_data']) as $item){
+					$jsonCart=json_decode($item, true);
+					$prodname=new Product();
+					if($jsonCart!=NULL){ //Sloppy explode fix. First array index will always be NULL since cart data starts with "::"
+						$product=$prodname->getProductById($jsonCart['id']);
+						$markup.="Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']} <br>";
+					}
+				}
+				$markup.="</td>";
+			}
+			else{
+				$jsonCart=json_decode(str_replace("::", "", $order['cart_data']), true);
+				$prodname=new Product();
+				$product=$prodname->getProductById($jsonCart['id']);
+				$markup.="<td class='verticalSplit'>Title: {$product['title']}, Size: {$jsonCart['size']}, Amount: {$jsonCart['num']}, Colour: {$jsonCart['colour']}</td>";
+			}
+			$markup.="<td class='verticalSplit'>".date("F j, Y, g:i a", $order['created_at'])."</td>";
+			$markup.="<td class='verticalSplit'>{$order['StatusName']}";
+			$markup.="</td>";
+			$markup.="<td class='noborder'><a href='".APP_URL."admin/delay/$id"."'>Mark as Delayed</a></td><td class='noborder'><a href='".APP_URL."admin/deliver/$id"."'>Mark as Delivered</a> </td><td class='noborder'><a href='".APP_URL."admin/processing/$id"."'>Mark as Processing</a> </td>";
+		$data['user_id']=$order['user_fs'];
+		$data['id']=$id;
+		$data['order']=$markup;
+		$this->view->files_css=['login.css', 'orderdetail.css'];
+		$this->view->render("admin/orderdetail", $data);
+	}
+	public function delay($id){
+		$order= new Order();
+		if($order->delay($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
+	}
+	public function deliver($id){
+		$order= new Order();
+		if($order->deliver($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
+	}
+	public function processing($id){
+		$order= new Order();
+		if($order->process($id)){
+			header("Location:".APP_URL."admin/orderdetail/".$id);
+		}else die("An error occured with the DB");
 	}
 }

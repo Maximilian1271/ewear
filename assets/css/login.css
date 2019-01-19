@@ -13,6 +13,10 @@
 	font-weight: normal;
 	margin: 0 50px;
 }
+.login>div.cancelled>h2{
+	font-weight: normal;
+	margin: 0 50px;
+}
 .login>form>.row{
 	margin-top: 52px;
 	justify-content: center;
@@ -275,4 +279,10 @@ div.field.checkbox,div.field.button{
 .checkbox>label>span>a{
 	color: #D19650;
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 1460px) {
+	.login {
+		width: 33.5%;
+	}
 }

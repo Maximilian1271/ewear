@@ -11,29 +11,24 @@ class Validator
 		'email'   => '/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/',
 		'url'     => '/^http(s)?:\/\/([\w]{1,20}\.)?[a-z0-9-]{2,65}(\.[a-z]{2,10}){1,2}(\/)?$/',
 	];
-
 	private $error_msg = [];
 	private $name;
 
 	public function val($data = "", $name = '', $required = false, $type = "text", $min = null, $max = null)
 	{
 		$this->name = $name;
-
 		if ($required && empty($data)) {
 			$this->setError(0);
 			return false;
 		}
-
 		if ($min !== null && strlen($data) < $min) {
 			$this->setError(1, $min);
 			return false;
 		}
-
 		if ($max !== null && strlen($data) > $max) {
 			$this->setError(2, $max);
 			return false;
 		}
-
 		if (array_key_exists($type, $this->filters)) {
 			if (! preg_match($this->filters[$type], $data)) {
 				$this->setError(3);
@@ -41,7 +36,6 @@ class Validator
 			}
 		}
 	}
-
 	public function comp($data1, $data2)
 	{
 		if (is_array($data1) && is_array($data2)) {
@@ -51,7 +45,6 @@ class Validator
 			}
 		}
 	}
-
 	private function setError($error, $opt = null)
 	{
 		switch ($error) {
@@ -90,14 +83,12 @@ class Validator
 		}
 
 	}
-
 	public function getErrors($errcode=false)
 	{
 		if($errcode!=false){
 			$this->setError($errcode);
 			return $this->error_msg;
 		}
-
 		return (count($this->error_msg) > 0) ? $this->error_msg : false;
 		return false;
 	}

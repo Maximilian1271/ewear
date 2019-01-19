@@ -4,7 +4,7 @@ html{
 	min-height: 100%;
 }
 footer{
-	position: absolute;
+	/*position: absolute;*/
 	left: 0;
 	bottom: 0;
 	width: 100%;
@@ -17,6 +17,9 @@ footer{
 .container>.login{
 	margin-bottom: 70px;
 }
+.container>.login:last-child{
+	margin-bottom: calc(70px*3.5);
+}
 .order{
 	float: right;
 }
@@ -24,6 +27,9 @@ footer{
 	display: contents;
 }
 .login>h2{
+	display: inline;
+}
+.login>div.cancelled>h2{
 	display: inline;
 }
 .login>p{
@@ -36,7 +42,7 @@ footer{
 }
 .res{
 	position: fixed;
-	top: 260px;
+	top: 15%;
 	width: 420px;
 	background: #F0F0F0;
 	border-radius: 10px;
@@ -73,6 +79,7 @@ footer{
 	transform-origin: left;
 }
 .option>label>img{
+	cursor: pointer;
 	display: block;
 	width: 64px;
 }
@@ -94,4 +101,38 @@ footer{
 .res>p{
 	color: #D19650;
 	font-weight: 600;
+}
+i.req{
+	color: red;
+	font-size: 17px;
+}
+p.additional{
+	margin-top: 30px;
+	font-size: .8em;
+	float: initial;
+	text-align: center;
+	display: block;
+}
+div.cancelled{
+	cursor: not-allowed;
+	color: rgba(0,0,0,0.4);
+}
+div.cancelled:hover{
+	transition: color .2s;
+	color: black;
+}
+@media screen and (max-width: 1730px){
+	.res{
+		right: 0;
+	}
+}
+@media screen and (max-width: 1550px){
+	.res{
+		width: 374px;
+	}
+}
+@media screen and (max-width: 1460px){
+	.res{
+		position: absolute;
+	}
 }

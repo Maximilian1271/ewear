@@ -2,13 +2,15 @@
 namespace App\Libs;
 class Formbuilder{
 	private $markup="";
-	public function __construct($name ,$method="POST", $action="", $enctype=false){
+	public function __construct($name ,$method="POST", $action="", $enctype=false, $csrf=false){
 		$this->markup="<form method='$method' ";
 		if(empty($action)) $this->markup.="id='f-$name'";
 		else $this->markup.="action='$action' id='f-$name'";
-		$this->markup.=($enctype)?"enctype=\"multipart/form-dat\">":">";
-//		$csrf= set_csrf();
-//		$this->markup.="<input type='hidden' value='$csrf' name='csrf'>";
+		$this->markup.=($enctype)?"enctype=\"multipart/form-data\">":">";
+		if($csrf){
+			$csrf= set_csrf();
+			$this->markup.="<input type='hidden' value='$csrf' name='csrf'>";
+		}
 		$this->markup.="<div class='row'>\n";
 	}
 	public function addInput($type="text", $name="", $label=false, $attr=array()){

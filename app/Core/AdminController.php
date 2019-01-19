@@ -16,7 +16,7 @@ class AdminController extends Controller {
 		$this->checkGroup();
 	}
 	private function checkGroup(){
-		if (Sessions::get('login')!=1){
+		if (Sessions::get('flyk1XIvh3ncxiLvBoKC')!=1){
 			header("Location:".APP_URL."error/login");
 		}
 		if(Sessions::get('user_group')<2){
