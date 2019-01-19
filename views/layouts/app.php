@@ -7,6 +7,7 @@
 	<link rel="icon" href="<?php echo APP_URL?>assets/images/favicon.png">
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php echo APP_URL."assets/css/css.css" ?>">
+	<link rel="stylesheet" href="<?php echo APP_URL."assets/css/globalNotif.css" ?>">
 	<?php if (count($this->files_css)>0){
 		echo $this->loadCss();
 	} ?>

@@ -44,4 +44,7 @@ class Order extends Model
 	public function process($id){
 		return $this->db->query("UPDATE {$this->table_name} SET status=0 WHERE uniqid='$id'");
 	}
+	public function cancel($id){
+		return $this->db->query("UPDATE {$this->table_name} SET status=5 WHERE uniqid='$id'");
+	}
 }

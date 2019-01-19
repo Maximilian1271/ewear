@@ -13,6 +13,10 @@
 	font-weight: normal;
 	margin: 0 50px;
 }
+.login>div.cancelled>h2{
+	font-weight: normal;
+	margin: 0 50px;
+}
 .login>form>.row{
 	margin-top: 52px;
 	justify-content: center;

@@ -242,6 +242,8 @@ class Admin extends AdminController
 			$markup.="<td class='verticalSplit'>{$order['StatusName']}";
 			$markup.="</td>";
 			$markup.="<td class='noborder'><a href='".APP_URL."admin/delay/$id"."'>Mark as Delayed</a></td><td class='noborder'><a href='".APP_URL."admin/deliver/$id"."'>Mark as Delivered</a> </td><td class='noborder'><a href='".APP_URL."admin/processing/$id"."'>Mark as Processing</a> </td>";
+		$data['user_id']=$order['user_fs'];
+		$data['id']=$id;
 		$data['order']=$markup;
 		$this->view->files_css=['login.css', 'orderdetail.css'];
 		$this->view->render("admin/orderdetail", $data);

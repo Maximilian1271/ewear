@@ -97,6 +97,14 @@ class User extends Model {
 				$stmt=$this->db->prepare("UPDATE {$this->table_name} SET data=? WHERE id=$id");
 				$stmt->bind_param("s", $user_data);
 				$stmt->execute();
+				if(!empty($data['pw'])){
+					$salt = $this->generateSalt();
+					$pw = sha1($data['pw'] . $salt) . ":" . $salt;
+					$stmt=$this->db->prepare("UPDATE {$this->table_name} SET data=?, password=? WHERE id=$id");
+					$stmt->bind_param("ss", $user_data, $pw);
+					$stmt->execute();
+					return true;
+				}
 				return true;
 			}
 

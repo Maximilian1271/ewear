@@ -1,4 +1,5 @@
 <div class="container">
+	<a href="<?php echo APP_URL."admin"?>">Admin</a>>User Control <br><br>
 	<div class="control">
 		<h2>UserControl</h2>
 		<table>
